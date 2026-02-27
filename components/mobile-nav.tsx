@@ -2,10 +2,22 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+
+const navLinks = [
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#video-cv", label: "Video CV" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#education", label: "Education" },
+  { href: "#certifications", label: "Certifications" },
+  { href: "#contact", label: "Contact" },
+]
 
 export function MobileNav() {
   const [open, setOpen] = useState(false)
@@ -14,22 +26,7 @@ export function MobileNav() {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="md:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-6 w-6"
-          >
-            <line x1="4" x2="20" y1="12" y2="12" />
-            <line x1="4" x2="20" y1="6" y2="6" />
-            <line x1="4" x2="20" y1="18" y2="18" />
-          </svg>
+          <Menu className="h-6 w-6" />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
@@ -45,54 +42,17 @@ export function MobileNav() {
             </Button>
           </div>
           <nav className="flex flex-col gap-4 mt-8">
-            <Link
-              href="#home"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="#about"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              href="#skills"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Skills
-            </Link>
-            <Link
-              href="#experience"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Experience
-            </Link>
-            <Link
-              href="#projects"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Projects
-            </Link>
-            <Link
-              href="#contact"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Contact
-            </Link>
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-lg font-medium py-2 transition-colors hover:text-primary"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
-          <div className="mt-auto pt-8">
-            <Button className="w-full" onClick={() => setOpen(false)}>
-              Download Resume
-            </Button>
-          </div>
         </div>
       </SheetContent>
     </Sheet>

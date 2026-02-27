@@ -8,6 +8,18 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ResumeDownload } from "./resume-download"
 
+const navLinks = [
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#video-cv", label: "Video CV" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#education", label: "Education" },
+  { href: "#certifications", label: "Certifications" },
+  { href: "#contact", label: "Contact" },
+]
+
 export function MobileNav() {
   const [open, setOpen] = useState(false)
 
@@ -31,55 +43,16 @@ export function MobileNav() {
             </Button>
           </div>
           <nav className="flex flex-col gap-4 mt-8">
-            <Link
-              href="#home"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="#about"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              href="#skills"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Skills
-            </Link>
-            <Link
-              href="#experience"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Experience
-            </Link>
-            <Link
-              href="#projects"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Projects
-            </Link>
-            <Link
-              href="#education"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Education
-            </Link>
-            <Link
-              href="#contact"
-              className="text-lg font-medium py-2 transition-colors hover:text-primary"
-              onClick={() => setOpen(false)}
-            >
-              Contact
-            </Link>
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-lg font-medium py-2 transition-colors hover:text-primary"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
           <div className="mt-auto pt-8">
             <ResumeDownload />

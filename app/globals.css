@@ -29,7 +29,7 @@
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 217.2 32.6% 12%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
@@ -43,8 +43,8 @@
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --border: 217.2 32.6% 22%;
+    --input: 217.2 32.6% 22%;
     --ring: 224.3 76.3% 48%;
   }
 }
@@ -60,20 +60,25 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: hsl(var(--muted));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: hsl(var(--foreground));
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Animation keyframes */
@@ -97,132 +102,10 @@
   }
 }
 
-@keyframes slideDown {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideLeft {
-  from {
-    transform: translateX(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideRight {
-  from {
-    transform: translateX(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Animation utilities */
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-in-out;
 }
 
 .animate-slideUp {
   animation: slideUp 0.5s ease-in-out;
-}
-
-.animate-slideDown {
-  animation: slideDown 0.5s ease-in-out;
-}
-
-.animate-slideLeft {
-  animation: slideLeft 0.5s ease-in-out;
-}
-
-.animate-slideRight {
-  animation: slideRight 0.5s ease-in-out;
-}
-
-.animate-pulse {
-  animation: pulse 2s infinite;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Transition utilities */
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.duration-300 {
-  transition-duration: 300ms;
-}
-
-.duration-500 {
-  transition-duration: 500ms;
-}
-
-.duration-700 {
-  transition-duration: 700ms;
-}
-
-.hover\:scale-105:hover {
-  transform: scale(1.05);
-}
-
-.hover\:scale-110:hover {
-  transform: scale(1.1);
-}
-
-.hover\:scale-125:hover {
-  transform: scale(1.25);
-}
-
-/* Dark mode improvements */
-.dark .card {
-  background-color: hsl(222.2 84% 4.9%);
-  color: hsl(210 40% 98%);
-  border-color: hsl(217.2 32.6% 17.5%);
-}
-
-.dark .badge {
-  background-color: hsl(217.2 32.6% 17.5%);
-  color: hsl(210 40% 98%);
-}
-
-.dark .text-muted-foreground {
-  color: hsl(215 20.2% 65.1%);
-}
-
-/* Improve dark mode contrast */
-.dark .bg-slate-50 {
-  background-color: hsl(222.2 84% 4.9%);
-}
-
-.dark .bg-white {
-  background-color: hsl(222.2 84% 4.9%);
 }

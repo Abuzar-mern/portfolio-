@@ -53,7 +53,7 @@ export function AnimatedContactForm() {
             type="text"
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
+            className="w-full px-4 py-2 border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
             placeholder="Your name"
             required
           />
@@ -68,7 +68,7 @@ export function AnimatedContactForm() {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
+            className="w-full px-4 py-2 border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
             placeholder="Your email"
             required
           />
@@ -83,7 +83,7 @@ export function AnimatedContactForm() {
             rows={5}
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
+            className="w-full px-4 py-2 border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
             placeholder="Your message"
             required
           ></textarea>

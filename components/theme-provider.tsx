@@ -1,14 +1,60 @@
-'use client'
+"use client"
 
-import * as React from 'react'
-import dynamic from 'next/dynamic'
-import type { ThemeProviderProps } from 'next-themes'
+import * as React from "react"
 
-const NextThemesProvider = dynamic(
-  () => import('next-themes').then((mod) => mod.ThemeProvider),
-  { ssr: false }
-)
+type Theme = "light" | "dark"
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
+const ThemeContext = React.createContext<{
+  theme: Theme
+  setTheme: (theme: Theme) => void
+}>({
+  theme: "light",
+  setTheme: () => {},
+})
+
+export function useTheme() {
+  return React.useContext(ThemeContext)
+}
+
+export function ThemeProvider({
+  children,
+  defaultTheme = "light",
+}: {
+  children: React.ReactNode
+  defaultTheme?: Theme
+  attribute?: string
+  enableSystem?: boolean
+  disableTransitionOnChange?: boolean
+}) {
+  const [theme, setThemeState] = React.useState<Theme>(defaultTheme)
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+    try {
+      const stored = localStorage.getItem("theme") as Theme | null
+      if (stored === "light" || stored === "dark") {
+        setThemeState(stored)
+        document.documentElement.classList.toggle("dark", stored === "dark")
+      }
+    } catch {}
+  }, [])
+
+  const setTheme = React.useCallback((newTheme: Theme) => {
+    setThemeState(newTheme)
+    try {
+      localStorage.setItem("theme", newTheme)
+    } catch {}
+    document.documentElement.classList.toggle("dark", newTheme === "dark")
+  }, [])
+
+  if (!mounted) {
+    return <>{children}</>
+  }
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  )
 }

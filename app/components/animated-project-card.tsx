@@ -13,10 +13,16 @@ type AnimatedProjectCardProps = {
   delay?: number
 }
 
-export function AnimatedProjectCard({ title, description, image, tags, delay = 0 }: AnimatedProjectCardProps) {
+export function AnimatedProjectCard({
+  title,
+  description,
+  image,
+  tags,
+  delay = 0,
+}: AnimatedProjectCardProps) {
   return (
     <AnimateInView delay={delay} direction="up">
-      <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg group bg-white dark:bg-slate-800 border dark:border-slate-700">
+      <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg group border border-border bg-card">
         <div className="relative h-48 w-full overflow-hidden">
           <Image
             src={image || "/placeholder.svg"}
@@ -26,14 +32,16 @@ export function AnimatedProjectCard({ title, description, image, tags, delay = 0
           />
         </div>
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-2 dark:text-white">{title}</h3>
-          <p className="text-muted-foreground mb-4 dark:text-slate-300">{description}</p>
+          <h3 className="text-xl font-semibold mb-2 text-card-foreground">
+            {title}
+          </h3>
+          <p className="text-muted-foreground mb-4">{description}</p>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag, index) => (
               <Badge
                 key={index}
                 variant="secondary"
-                className="transition-all duration-300 hover:bg-primary hover:text-white dark:bg-slate-700 dark:text-slate-200"
+                className="transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
               >
                 {tag}
               </Badge>

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Github, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react"
+import { Github, Linkedin, Mail, MapPin, Phone, Youtube, Play } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { ResumeDownload } from "./components/resume-download"
@@ -24,50 +24,26 @@ export default function Home() {
             Abu Zar
           </Link>
           <nav className="ml-auto hidden md:flex gap-6">
-            <Link
-              href="#home"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:scale-105"
-            >
-              Home
-            </Link>
-            <Link
-              href="#about"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:scale-105"
-            >
-              About
-            </Link>
-            <Link
-              href="#skills"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:scale-105"
-            >
-              Skills
-            </Link>
-            <Link
-              href="#experience"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:scale-105"
-            >
-              Experience
-            </Link>
-            <Link
-              href="#projects"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:scale-105"
-            >
-              Projects
-            </Link>
-            <Link
-              href="#education"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:scale-105"
-            >
-              Education
-            </Link>
-            <Link
-              href="#contact"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:scale-105"
-            >
-              Contact
-            </Link>
+            {[
+              { href: "#home", label: "Home" },
+              { href: "#about", label: "About" },
+              { href: "#video-cv", label: "Video CV" },
+              { href: "#skills", label: "Skills" },
+              { href: "#experience", label: "Experience" },
+              { href: "#projects", label: "Projects" },
+              { href: "#education", label: "Education" },
+              { href: "#contact", label: "Contact" },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:scale-105"
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
-          <div className="flex items-center ml-auto md:ml-0">
+          <div className="flex items-center ml-auto md:ml-4 gap-1">
             <ThemeToggle />
             <MobileNav />
           </div>
@@ -84,8 +60,12 @@ export default function Home() {
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
               <AnimateInView direction="left">
                 <div className="space-y-4">
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">Hi, I&apos;m Abu Zar</h1>
-                  <p className="text-xl md:text-2xl text-slate-300">MERN Stack Developer | Social Media Marketer</p>
+                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-balance">
+                    {"Hi, I'm Abu Zar"}
+                  </h1>
+                  <p className="text-xl md:text-2xl text-slate-300">
+                    MERN Stack Developer | Social Media Marketer
+                  </p>
                   <p className="text-slate-400 max-w-[600px]">
                     Results-driven social media marketer and front-end web developer with expertise in creating engaging
                     online content and building responsive web applications.
@@ -95,10 +75,19 @@ export default function Home() {
                     <Link href="#contact">
                       <Button
                         size="lg"
-                        variant="secondary"
                         className="bg-blue-600 hover:bg-blue-700 text-white border-0 transition-transform duration-300 hover:scale-105"
                       >
                         Contact Me
+                      </Button>
+                    </Link>
+                    <Link href="#video-cv">
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="border-slate-500 text-slate-200 hover:bg-slate-700 hover:text-white transition-transform duration-300 hover:scale-105"
+                      >
+                        <Play className="mr-2 h-4 w-4" />
+                        Watch Video CV
                       </Button>
                     </Link>
                   </div>
@@ -109,7 +98,7 @@ export default function Home() {
                   <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden border-4 border-slate-700 transition-all duration-500 hover:border-blue-500">
                     <Image
                       src="/images/abu-zar-profile-new.png"
-                      alt="Abu Zar"
+                      alt="Abu Zar - MERN Stack Developer and Social Media Marketer"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-105"
                       priority
@@ -122,7 +111,7 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-16 md:py-24 bg-white dark:bg-slate-900">
+        <section id="about" className="py-16 md:py-24 bg-background">
           <div className="container px-4 md:px-6">
             <SectionHeading title="About Me" />
             <div className="max-w-3xl mx-auto">
@@ -134,16 +123,62 @@ export default function Home() {
                   bring a unique blend of creativity and technical expertise to every project.
                 </p>
                 <p className="text-lg text-muted-foreground mb-6">
-                  My background includes frontend development, WordPress customization, and graphic design. I&apos;m
-                  constantly expanding my skills in modern web technologies to deliver high-quality digital solutions.
+                  Currently teaching at Government Technical College Abbottabad, I share my knowledge in web development
+                  and digital marketing with the next generation of IT professionals. My background includes frontend
+                  development, WordPress customization, and graphic design.
                 </p>
-                <div className="flex justify-center mt-8">
-                  <Link href="/files/abu-zar-cv.pdf" target="_blank">
-                    <Button className="flex items-center gap-2 transition-transform duration-300 hover:scale-105">
-                      <Image src="/files/abu-zar-cv.pdf" alt="Abu Zar CV" width={24} height={24} />
-                      View Full CV
-                    </Button>
-                  </Link>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                  <div className="text-center p-4 rounded-lg bg-muted">
+                    <p className="text-3xl font-bold text-primary">4+</p>
+                    <p className="text-sm text-muted-foreground">Years Experience</p>
+                  </div>
+                  <div className="text-center p-4 rounded-lg bg-muted">
+                    <p className="text-3xl font-bold text-primary">6+</p>
+                    <p className="text-sm text-muted-foreground">Companies</p>
+                  </div>
+                  <div className="text-center p-4 rounded-lg bg-muted">
+                    <p className="text-3xl font-bold text-primary">3</p>
+                    <p className="text-sm text-muted-foreground">Certifications</p>
+                  </div>
+                  <div className="text-center p-4 rounded-lg bg-muted">
+                    <p className="text-3xl font-bold text-primary">10+</p>
+                    <p className="text-sm text-muted-foreground">Projects</p>
+                  </div>
+                </div>
+              </AnimateInView>
+            </div>
+          </div>
+        </section>
+
+        {/* Video CV Section */}
+        <section id="video-cv" className="py-16 md:py-24 bg-muted">
+          <div className="container px-4 md:px-6">
+            <SectionHeading title="Watch My Video CV" />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto items-center">
+              <AnimateInView direction="left">
+                <div className="space-y-6">
+                  <p className="text-lg text-muted-foreground">
+                    Watch my professional video resume to learn more about my skills, experience, and career journey.
+                    Get a closer look at who I am and what I bring to the table.
+                  </p>
+                  <p className="text-muted-foreground">
+                    With over 4 years of experience in social media marketing, web development, and graphic design,
+                    I bring a unique blend of creativity and technical expertise to every project.
+                  </p>
+                  <div className="pt-2">
+                    <ResumeDownload />
+                  </div>
+                </div>
+              </AnimateInView>
+              <AnimateInView direction="right" delay={200}>
+                <div className="relative rounded-xl overflow-hidden shadow-2xl aspect-video">
+                  <iframe
+                    src="https://drive.google.com/file/d/1lzPEMf7Dnc5EKtSPGAmLD8x-U_S3jFfE/preview"
+                    className="w-full h-full absolute inset-0"
+                    allow="autoplay"
+                    loading="lazy"
+                    title="Abu Zar - Video CV"
+                  />
                 </div>
               </AnimateInView>
             </div>
@@ -151,36 +186,46 @@ export default function Home() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-16 md:py-24 bg-slate-50 dark:bg-slate-800">
+        <section id="skills" className="py-16 md:py-24 bg-background">
           <div className="container px-4 md:px-6">
-            <SectionHeading title="My Skills" subtitle="Here are the technologies and tools I work with" />
+            <SectionHeading title="My Skills" subtitle="Technologies and tools I work with" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               <AnimatedSkillCard
                 title="Web Development"
-                skills={["WordPress Development", "Frontend Development", "JavaScript", "Responsive Design"]}
+                skills={["WordPress", "HTML/CSS", "JavaScript", "Tailwind CSS"]}
                 delay={100}
               />
               <AnimatedSkillCard
                 title="Digital Marketing"
-                skills={["Social Media Marketing", "Content Creation", "Digital Marketing", "SEO Basics"]}
+                skills={["Social Media Marketing", "Content Creation", "SEO Basics", "Analytics"]}
                 delay={200}
               />
               <AnimatedSkillCard
                 title="Design"
-                skills={["Graphic Design", "UI/UX Basics", "Visual Communication", "Brand Identity"]}
+                skills={["Graphic Design", "CorelDRAW", "Photoshop", "InPage"]}
                 delay={300}
               />
               <AnimatedSkillCard
-                title="Business Tools"
-                skills={["Microsoft Office", "QuickBooks Desktop", "Google Workspace", "Project Management"]}
+                title="MERN Stack"
+                skills={["React.js", "Node.js", "Express.js", "MongoDB"]}
                 delay={400}
+              />
+              <AnimatedSkillCard
+                title="Office Tools"
+                skills={["Microsoft Word", "Excel", "PowerPoint", "QuickBooks"]}
+                delay={500}
+              />
+              <AnimatedSkillCard
+                title="Soft Skills"
+                skills={["Communication", "Teamwork", "Problem Solving", "Time Management"]}
+                delay={600}
               />
             </div>
           </div>
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-16 md:py-24 bg-white dark:bg-slate-900">
+        <section id="experience" className="py-16 md:py-24 bg-muted">
           <div className="container px-4 md:px-6">
             <SectionHeading title="Work Experience" />
             <div className="max-w-3xl mx-auto">
@@ -195,20 +240,20 @@ export default function Home() {
                 <AnimatedExperienceItem
                   title="Social Media Marketer"
                   company="Software Company (Comrex Pakistan)"
-                  period="August 2024 – April 2025"
+                  period="August 2024 - April 2025"
                   description="Work as a Social Media Marketer at Comrex Pakistan."
                   delay={200}
                 />
                 <AnimatedExperienceItem
                   title="Social Media & Website Consultant"
                   company="Construction Company (Hunani Builders and Developers)"
-                  period="January 2022 – July 2024"
+                  period="January 2022 - July 2024"
                   description="2 years and 6 months experience as a social media and website consultant and other duties."
                   delay={300}
                 />
                 <AnimatedExperienceItem
                   title="Frontend Developer"
-                  company="Government Technical and Vocational Centre - Khaki mansehra"
+                  company="Government Technical and Vocational Centre - Khaki Mansehra"
                   period="May 2020"
                   description="Developed responsive web interfaces and provided technical support for the institution's digital presence."
                   delay={400}
@@ -216,9 +261,23 @@ export default function Home() {
                 <AnimatedExperienceItem
                   title="Graphic Designer"
                   company="Abbasi Printing Press"
-                  period="June 2015 – May 2017"
+                  period="June 2015 - May 2017"
                   description="3 years experience in printing sector. Created print designs including brochures, business cards, and marketing materials."
                   delay={500}
+                />
+                <AnimatedExperienceItem
+                  title="Data Entry Operator"
+                  company="Plus Pharmacy Abbottabad"
+                  period="5 months"
+                  description="Managed data entry operations and maintained accurate records for pharmacy inventory."
+                  delay={600}
+                />
+                <AnimatedExperienceItem
+                  title="Relationship Service Officer"
+                  company="Ufone (Mobile Operator)"
+                  period="3 months"
+                  description="Provided customer service and managed client relationships for the telecom company."
+                  delay={700}
                 />
               </div>
             </div>
@@ -226,50 +285,50 @@ export default function Home() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-16 md:py-24 bg-slate-50 dark:bg-slate-800">
+        <section id="projects" className="py-16 md:py-24 bg-background">
           <div className="container px-4 md:px-6">
-            <SectionHeading title="My Projects" subtitle="Here are some of my recent web development projects" />
+            <SectionHeading title="My Projects" subtitle="Some of my recent work" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <AnimatedProjectCard
                 title="Hunani Builders Website"
                 description="Designed and developed a responsive website for Hunani Builders and Developers with property listings and contact forms."
-                image="/placeholder.svg?height=300&width=500&text=Hunani+Builders&bg=blue"
+                image="/images/project-hunani-builders.jpg"
                 tags={["WordPress", "Web Design"]}
                 delay={100}
               />
               <AnimatedProjectCard
                 title="Social Media Dashboard"
                 description="Created a social media analytics dashboard for tracking engagement, reach, and conversion metrics."
-                image="/placeholder.svg?height=300&width=500&text=Social+Media+Dashboard&bg=purple"
+                image="/images/project-social-dashboard.jpg"
                 tags={["Analytics", "Dashboard"]}
                 delay={200}
               />
               <AnimatedProjectCard
                 title="E-Commerce Platform"
                 description="Developed a WordPress-based e-commerce solution with custom product categories and payment integration."
-                image="/placeholder.svg?height=300&width=500&text=E-Commerce+Platform&bg=green"
+                image="/images/project-ecommerce.jpg"
                 tags={["WordPress", "E-Commerce"]}
                 delay={300}
               />
               <AnimatedProjectCard
                 title="Personal Blog"
-                description="Created and maintain a personal blog (wisdomwave045.blogspot.com) with custom design elements."
-                image="/placeholder.svg?height=300&width=500&text=Personal+Blog&bg=orange"
+                description="Created and maintain a personal blog with custom design elements and regular content updates."
+                image="/images/project-blog.jpg"
                 tags={["Blogger", "Content"]}
                 delay={400}
               />
               <AnimatedProjectCard
                 title="Print Design Portfolio"
                 description="Collection of print designs created for Abbasi Printing Press including brochures and marketing materials."
-                image="/placeholder.svg?height=300&width=500&text=Print+Designs&bg=red"
+                image="/images/project-print-design.jpg"
                 tags={["Graphic Design", "Print"]}
                 delay={500}
               />
               <AnimatedProjectCard
                 title="Educational Website"
                 description="Developed an educational resource website for Government Technical College students."
-                image="/placeholder.svg?height=300&width=500&text=Educational+Website&bg=teal"
-                tags={["Education", "Resources"]}
+                image="/images/project-education.jpg"
+                tags={["Education", "Web Dev"]}
                 delay={600}
               />
             </div>
@@ -277,41 +336,41 @@ export default function Home() {
         </section>
 
         {/* Education Section */}
-        <section id="education" className="py-16 md:py-24 bg-white dark:bg-slate-900">
+        <section id="education" className="py-16 md:py-24 bg-muted">
           <div className="container px-4 md:px-6">
             <SectionHeading title="Education" />
             <div className="max-w-3xl mx-auto">
               <div className="space-y-8">
                 <AnimateInView direction="left" delay={100}>
-                  <div className="relative pl-8 pb-8 border-l-2 border-slate-200 dark:border-slate-700 last:border-0 last:pb-0">
-                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125 hover:bg-blue-400"></div>
+                  <div className="relative pl-8 pb-8 border-l-2 border-border last:border-0 last:pb-0">
+                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125 hover:bg-blue-400" />
                     <div>
-                      <h3 className="text-xl font-semibold">F.Sc (2015-2022)</h3>
-                      <div className="text-muted-foreground mb-2">
-                        <span className="font-medium">Government Higher Secondary School - Bherkund mansehra</span>
-                      </div>
+                      <h3 className="text-xl font-semibold">CIT (Certificate in Information Technology) 2021-2023</h3>
+                      <p className="text-muted-foreground">
+                        Government Technical and Vocational Centre - Khaki Mansehra
+                      </p>
                     </div>
                   </div>
                 </AnimateInView>
                 <AnimateInView direction="left" delay={200}>
-                  <div className="relative pl-8 pb-8 border-l-2 border-slate-200 dark:border-slate-700 last:border-0 last:pb-0">
-                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125 hover:bg-blue-400"></div>
+                  <div className="relative pl-8 pb-8 border-l-2 border-border last:border-0 last:pb-0">
+                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125 hover:bg-blue-400" />
                     <div>
                       <h3 className="text-xl font-semibold">DIT (Diploma in Information Technology) 2021-2022</h3>
-                      <div className="text-muted-foreground mb-2">
-                        <span className="font-medium">Government Technical and Vocational Centre - Khaki mansehra</span>
-                      </div>
+                      <p className="text-muted-foreground">
+                        Government Technical and Vocational Centre - Khaki Mansehra
+                      </p>
                     </div>
                   </div>
                 </AnimateInView>
                 <AnimateInView direction="left" delay={300}>
-                  <div className="relative pl-8 pb-8 border-l-2 border-slate-200 dark:border-slate-700 last:border-0 last:pb-0">
-                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125 hover:bg-blue-400"></div>
+                  <div className="relative pl-8 pb-8 border-l-2 border-border last:border-0 last:pb-0">
+                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125 hover:bg-blue-400" />
                     <div>
-                      <h3 className="text-xl font-semibold">CIT (Certificate in Information Technology) 2021-2023</h3>
-                      <div className="text-muted-foreground mb-2">
-                        <span className="font-medium">Government Technical and Vocational Centre - Khaki mansehra</span>
-                      </div>
+                      <h3 className="text-xl font-semibold">F.Sc (2015-2022)</h3>
+                      <p className="text-muted-foreground">
+                        Government Higher Secondary School - Bherkund Mansehra
+                      </p>
                     </div>
                   </div>
                 </AnimateInView>
@@ -321,7 +380,7 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-24 bg-white dark:bg-slate-900">
+        <section id="contact" className="py-16 md:py-24 bg-background">
           <div className="container px-4 md:px-6">
             <SectionHeading title="Get In Touch" subtitle="Feel free to contact me for any project or collaboration" />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -348,7 +407,7 @@ export default function Home() {
                   </div>
 
                   <h3 className="text-xl font-semibold mt-8 mb-4">Connect With Me</h3>
-                  <div className="flex space-x-4">
+                  <div className="flex gap-3">
                     <Link href="https://linkedin.com/in/abu-zar786" target="_blank" rel="noopener noreferrer">
                       <Button
                         variant="outline"
@@ -363,7 +422,7 @@ export default function Home() {
                       <Button
                         variant="outline"
                         size="icon"
-                        className="transition-all duration-300 hover:bg-gray-800 hover:text-white hover:border-gray-800"
+                        className="transition-all duration-300 hover:bg-slate-800 hover:text-white hover:border-slate-800"
                       >
                         <Github className="h-5 w-5" />
                         <span className="sr-only">GitHub</span>
@@ -393,8 +452,8 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="text-primary hover:underline flex items-center group"
                     >
-                      <span className="mr-2 transition-transform duration-300 group-hover:translate-x-1">•</span> Blog:
-                      wisdomwave045.blogspot.com
+                      <span className="mr-2 transition-transform duration-300 group-hover:translate-x-1">{">"}</span>
+                      Blog: wisdomwave045.blogspot.com
                     </Link>
                     <Link
                       href="https://www.youtube.com/channel/UCEN08HLCgJBIw7maCTD"
@@ -402,7 +461,7 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="text-primary hover:underline flex items-center group"
                     >
-                      <span className="mr-2 transition-transform duration-300 group-hover:translate-x-1">•</span>{" "}
+                      <span className="mr-2 transition-transform duration-300 group-hover:translate-x-1">{">"}</span>
                       YouTube Channel
                     </Link>
                   </div>
@@ -426,7 +485,7 @@ export default function Home() {
               <h2 className="text-2xl font-bold mb-2">Abu Zar</h2>
               <p className="text-slate-400">MERN Stack Developer | Social Media Marketer</p>
             </div>
-            <div className="flex space-x-4">
+            <div className="flex gap-3">
               <Link href="https://linkedin.com/in/abu-zar786" target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="ghost"
@@ -464,7 +523,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-slate-800 mt-8 pt-8 text-center">
-            <p className="text-slate-400">© {new Date().getFullYear()} Abu Zar. All rights reserved.</p>
+            <p className="text-slate-400">{`\u00A9 ${new Date().getFullYear()} Abu Zar. All rights reserved.`}</p>
           </div>
         </div>
       </footer>

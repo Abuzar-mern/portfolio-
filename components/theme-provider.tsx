@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import * as React from 'react'
-import dynamic from 'next/dynamic'
-import type { ThemeProviderProps } from 'next-themes'
+import * as React from "react"
+import dynamic from "next/dynamic"
+import type { ThemeProviderProps } from "next-themes"
 
 const NextThemesProvider = dynamic(
-  () => import('next-themes').then((mod) => mod.ThemeProvider),
+  () => import("next-themes").then((mod) => mod.ThemeProvider),
   { ssr: false }
 )
 

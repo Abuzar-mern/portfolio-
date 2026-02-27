@@ -10,6 +10,8 @@ import {
   Play,
   Globe,
   ExternalLink,
+  Award,
+  BookOpen,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -42,6 +44,7 @@ export default function Home() {
               { href: "#experience", label: "Experience" },
               { href: "#projects", label: "Projects" },
               { href: "#education", label: "Education" },
+              { href: "#certifications", label: "Certifications" },
               { href: "#contact", label: "Contact" },
             ].map((item) => (
               <Link
@@ -74,15 +77,20 @@ export default function Home() {
                     {"Hi, I'm Abu Zar"}
                   </h1>
                   <p className="text-xl md:text-2xl text-slate-300">
-                    MERN Stack Developer | Social Media Marketer
+                    IT Professional | Web Developer | Digital Marketer
                   </p>
                   <p className="text-slate-400 max-w-[600px] leading-relaxed">
-                    Results-driven social media marketer and front-end web
-                    developer with expertise in creating engaging online content
-                    and building responsive web applications. Founder of{" "}
-                    <span className="text-blue-400 font-semibold">
+                    Detail-oriented IT professional and Computer Science graduate
+                    with strong skills in graphic designing, office automation,
+                    and web technologies. Founder of{" "}
+                    <Link
+                      href="https://v0-kinza-tech-portfolio.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 font-semibold hover:text-blue-300 underline underline-offset-2 transition-colors"
+                    >
                       Kinza Tech Solutions
-                    </span>{" "}
+                    </Link>{" "}
                     - Digital Creative Services.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 pt-4">
@@ -114,7 +122,7 @@ export default function Home() {
                   <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden border-4 border-slate-700 transition-all duration-500 hover:border-blue-500">
                     <Image
                       src="/images/abu-zar-profile-new.png"
-                      alt="Abu Zar - MERN Stack Developer and Social Media Marketer"
+                      alt="Abu Zar - IT Professional and Web Developer"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-105"
                       priority
@@ -133,28 +141,32 @@ export default function Home() {
             <div className="max-w-3xl mx-auto">
               <AnimateInView>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Results-driven social media marketer and front-end web
-                  developer with expertise in creating engaging online content
-                  and building responsive web applications. With a robust track
-                  record at Hunani Builders and Developers, Government Technical
-                  and Vocational Centre, and Abbasi Printing Press, I bring a
-                  unique blend of creativity and technical expertise to every
-                  project.
+                  Detail-oriented IT professional and Computer Science graduate
+                  with strong skills in graphic designing, office automation, and
+                  web technologies. Experienced in digital documentation,
+                  reporting, and visual content creation. Hands-on knowledge of
+                  HTML, CSS, and JavaScript, currently learning the MERN stack.
                 </p>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Currently teaching at Government Technical College
-                  Abbottabad and running{" "}
-                  <span className="font-semibold text-primary">
+                  Certified in Information Technology, Graphics and Web Design,
+                  Artificial Intelligence, Cybersecurity, and Android
+                  Development. Currently teaching at Government Technical
+                  College Abbottabad and running{" "}
+                  <Link
+                    href="https://v0-kinza-tech-portfolio.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-primary hover:underline"
+                  >
                     Kinza Tech Solutions
-                  </span>
-                  , a digital creative services company offering web design,
-                  social media marketing, and graphic design solutions.
+                  </Link>
+                  , a digital creative services company.
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                   {[
-                    { value: "4+", label: "Years Experience" },
+                    { value: "5+", label: "Years Experience" },
                     { value: "6+", label: "Companies" },
-                    { value: "3", label: "Certifications" },
+                    { value: "9+", label: "Certifications" },
                     { value: "10+", label: "Projects" },
                   ].map((stat) => (
                     <div
@@ -189,13 +201,17 @@ export default function Home() {
                     Marketing & Graphic Design
                   </p>
                 </div>
-                <Link href="#contact">
+                <Link
+                  href="https://v0-kinza-tech-portfolio.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button
                     size="lg"
                     className="bg-white text-blue-700 hover:bg-blue-50 font-semibold transition-transform duration-300 hover:scale-105"
                   >
                     <Globe className="mr-2 h-4 w-4" />
-                    Get a Quote
+                    Visit Website
                   </Button>
                 </Link>
               </div>
@@ -216,9 +232,9 @@ export default function Home() {
                     who I am and what I bring to the table.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    With over 4 years of experience in social media marketing,
-                    web development, and graphic design, I bring a unique blend
-                    of creativity and technical expertise to every project.
+                    With over 5 years of experience in IT, graphic design, web
+                    development, and digital marketing, I bring a unique blend of
+                    creativity and technical expertise to every project.
                   </p>
                   <div className="pt-2">
                     <ResumeDownload />
@@ -249,48 +265,33 @@ export default function Home() {
             />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               <AnimatedSkillCard
-                title="Web Development"
-                skills={["WordPress", "HTML/CSS", "JavaScript", "Tailwind CSS"]}
+                title="Graphic Design"
+                skills={["CorelDRAW", "Adobe Photoshop", "Adobe Illustrator", "InPage"]}
                 delay={100}
               />
               <AnimatedSkillCard
-                title="Digital Marketing"
-                skills={[
-                  "Social Media Marketing",
-                  "Content Creation",
-                  "SEO Basics",
-                  "Analytics",
-                ]}
+                title="Web Technologies"
+                skills={["HTML", "CSS", "JavaScript", "WordPress"]}
                 delay={200}
               />
               <AnimatedSkillCard
-                title="Design"
-                skills={["CorelDRAW", "Photoshop", "Illustrator", "InPage"]}
+                title="MERN Stack (Learning)"
+                skills={["React.js", "Node.js", "Express.js", "MongoDB"]}
                 delay={300}
               />
               <AnimatedSkillCard
-                title="MERN Stack"
-                skills={["React.js", "Node.js", "Express.js", "MongoDB"]}
+                title="Office Tools"
+                skills={["MS Word", "MS Excel", "MS PowerPoint", "QuickBooks"]}
                 delay={400}
               />
               <AnimatedSkillCard
-                title="Office Tools"
-                skills={[
-                  "Microsoft Word",
-                  "Excel",
-                  "PowerPoint",
-                  "QuickBooks",
-                ]}
+                title="Digital Marketing"
+                skills={["Social Media Marketing", "Content Creation", "SEO Basics", "Analytics"]}
                 delay={500}
               />
               <AnimatedSkillCard
                 title="Soft Skills"
-                skills={[
-                  "Communication",
-                  "Teamwork",
-                  "Problem Solving",
-                  "Time Management",
-                ]}
+                skills={["Communication", "Teamwork", "Time Management", "Problem Solving"]}
                 delay={600}
               />
             </div>
@@ -300,7 +301,7 @@ export default function Home() {
         {/* Experience Section */}
         <section id="experience" className="py-16 md:py-24 bg-muted">
           <div className="container px-4 md:px-6">
-            <SectionHeading title="Work Experience" />
+            <SectionHeading title="Professional Experience" />
             <div className="max-w-3xl mx-auto">
               <div className="space-y-8">
                 <AnimatedExperienceItem
@@ -318,24 +319,24 @@ export default function Home() {
                   delay={200}
                 />
                 <AnimatedExperienceItem
-                  title="Social Media & Website Consultant"
-                  company="Construction Company (Hunani Builders and Developers)"
+                  title="IT & Digital Support / Assistant Manager"
+                  company="Hunani Builders & Developers, Karachi"
                   period="January 2022 - July 2024"
-                  description="2 years and 6 months experience as a social media and website consultant. Managed online presence, designed website, and handled digital marketing."
+                  description="Managed digital records, reports, and documentation using MS Office tools. Supported business operations through graphic design and digital content creation. Maintained structured data, daily reports, and assisted in IT-related tasks."
                   delay={300}
                 />
                 <AnimatedExperienceItem
-                  title="Frontend Developer"
-                  company="Govt. Technical & Vocational Centre - Khaki Mansehra"
+                  title="IT & Office Automation Intern (Paid - 6 Months)"
+                  company="Govt. Technical & Vocational Center, Khaki, Mansehra"
                   period="May 2020"
-                  description="Developed responsive web interfaces using HTML, CSS, and JavaScript for the institution."
+                  description="Received practical training in office automation, graphics, and basic web-related tasks. Assisted in maintaining documentation, records, and workflow processes. Supported instructors and staff in daily IT and administrative activities."
                   delay={400}
                 />
                 <AnimatedExperienceItem
-                  title="Graphic Designer"
-                  company="Abbasi Printing Press"
+                  title="Graphic Designer (Part-Time)"
+                  company="Baber Printing Press, Mansehra"
                   period="June 2015 - May 2017"
-                  description="3 years experience in printing sector. Created brochures, business cards, banners, and marketing materials."
+                  description="Designed posters, banners, visiting cards, and promotional materials. Used CorelDRAW, Adobe Photoshop, Adobe Illustrator, and InPage. Prepared print-ready files and handled client revisions professionally."
                   delay={500}
                 />
                 <AnimatedExperienceItem
@@ -388,9 +389,9 @@ export default function Home() {
               />
               <AnimatedProjectCard
                 title="Print Design Portfolio"
-                description="Collection of print designs created at Abbasi Printing Press including brochures, banners, and business cards."
+                description="Collection of print designs including posters, banners, visiting cards, and promotional materials using CorelDRAW, Photoshop and Illustrator."
                 image="/images/project-print-design.jpg"
-                tags={["CorelDRAW", "Print Design"]}
+                tags={["CorelDRAW", "Photoshop"]}
                 delay={400}
               />
               <AnimatedProjectCard
@@ -421,13 +422,13 @@ export default function Home() {
                   <div className="relative pl-8 pb-8 border-l-2 border-border">
                     <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125" />
                     <div>
-                      <h3 className="text-xl font-semibold text-foreground">
-                        CIT (Certificate in Information Technology) 2021-2023
-                      </h3>
-                      <p className="text-muted-foreground">
-                        Government Technical and Vocational Centre - Khaki
-                        Mansehra
-                      </p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <BookOpen className="h-5 w-5 text-primary" />
+                        <h3 className="text-xl font-semibold text-foreground">
+                          Bachelor of Science in Computer Science (BSCS)
+                        </h3>
+                      </div>
+                      <p className="text-muted-foreground">Hazara University, Pakistan</p>
                     </div>
                   </div>
                 </AnimateInView>
@@ -435,12 +436,14 @@ export default function Home() {
                   <div className="relative pl-8 pb-8 border-l-2 border-border">
                     <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125" />
                     <div>
-                      <h3 className="text-xl font-semibold text-foreground">
-                        DIT (Diploma in Information Technology) 2021-2022
-                      </h3>
+                      <div className="flex items-center gap-2 mb-1">
+                        <BookOpen className="h-5 w-5 text-primary" />
+                        <h3 className="text-xl font-semibold text-foreground">
+                          F.Sc (Pre-Engineering)
+                        </h3>
+                      </div>
                       <p className="text-muted-foreground">
-                        Government Technical and Vocational Centre - Khaki
-                        Mansehra
+                        Government Higher Secondary School Bherkund, Mansehra
                       </p>
                     </div>
                   </div>
@@ -449,11 +452,14 @@ export default function Home() {
                   <div className="relative pl-8 border-l-2 border-border">
                     <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125" />
                     <div>
-                      <h3 className="text-xl font-semibold text-foreground">
-                        F.Sc (2015-2022)
-                      </h3>
+                      <div className="flex items-center gap-2 mb-1">
+                        <BookOpen className="h-5 w-5 text-primary" />
+                        <h3 className="text-xl font-semibold text-foreground">
+                          Matric (Science)
+                        </h3>
+                      </div>
                       <p className="text-muted-foreground">
-                        Government Higher Secondary School - Bherkund Mansehra
+                        Government Higher Secondary School Bherkund, Mansehra
                       </p>
                     </div>
                   </div>
@@ -463,8 +469,85 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Diplomas & Certifications Section */}
+        <section id="certifications" className="py-16 md:py-24 bg-background">
+          <div className="container px-4 md:px-6">
+            <SectionHeading
+              title="Diplomas & Certifications"
+              subtitle="Professional qualifications and achievements"
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {[
+                {
+                  title: "Office Automation Diploma",
+                  year: "2016",
+                  type: "Diploma",
+                },
+                {
+                  title: "Spoken English Diploma",
+                  year: "2017",
+                  type: "Diploma",
+                },
+                {
+                  title: "Achievement Certificate - Stage Secretary",
+                  year: "2019",
+                  type: "Certificate",
+                },
+                {
+                  title: "Diploma in Information Technology (DIT - 1 Year)",
+                  year: "2021",
+                  type: "Diploma",
+                },
+                {
+                  title: "IT Certificate - Graphics, Web & Mobile App Designing",
+                  year: "2021",
+                  type: "Certificate",
+                },
+                {
+                  title: "Foundation of Artificial Intelligence",
+                  year: "2023",
+                  type: "Online - Great Learning",
+                },
+                {
+                  title: "Android Application Development",
+                  year: "2023",
+                  type: "Online - Great Learning",
+                },
+                {
+                  title: "Introduction to Cybersecurity",
+                  year: "2023",
+                  type: "Online - Great Learning",
+                },
+                {
+                  title: "Soft Skills Diploma",
+                  year: "2025",
+                  type: "OEC",
+                },
+              ].map((cert, index) => (
+                <AnimateInView key={cert.title} delay={index * 100}>
+                  <div className="p-5 rounded-lg bg-card border border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="flex items-start gap-3">
+                      <div className="p-2 rounded-md bg-primary/10 shrink-0">
+                        <Award className="h-5 w-5 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-card-foreground leading-snug">
+                          {cert.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {cert.year} - {cert.type}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </AnimateInView>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-24 bg-background">
+        <section id="contact" className="py-16 md:py-24 bg-muted">
           <div className="container px-4 md:px-6">
             <SectionHeading
               title="Get In Touch"
@@ -492,34 +575,52 @@ export default function Home() {
                     <div className="flex items-start group">
                       <MapPin className="h-5 w-5 mr-3 mt-1 text-primary group-hover:scale-110 transition-transform duration-300" />
                       <span className="text-foreground group-hover:text-primary transition-colors duration-300">
-                        Mohalla Seyadan, Post Office Bherkund, Mansehra,
-                        Pakistan
+                        Bherkund, Mansehra, Pakistan
                       </span>
+                    </div>
+                    <div className="flex items-center group">
+                      <Globe className="h-5 w-5 mr-3 text-primary group-hover:scale-110 transition-transform duration-300" />
+                      <Link
+                        href="https://v0-abu-zar-portfolio.vercel.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground group-hover:text-primary transition-colors duration-300"
+                      >
+                        v0-abu-zar-portfolio.vercel.app
+                      </Link>
                     </div>
                   </div>
 
                   <h3 className="text-xl font-semibold mt-8 mb-4 text-foreground">
                     My Company
                   </h3>
-                  <div className="p-4 rounded-lg bg-muted border border-border">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Globe className="h-5 w-5 text-primary" />
-                      <span className="font-semibold text-foreground">
-                        Kinza Tech Solutions
-                      </span>
+                  <Link
+                    href="https://v0-kinza-tech-portfolio.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <div className="p-4 rounded-lg bg-card border border-border transition-all duration-300 hover:shadow-lg hover:border-primary">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Globe className="h-5 w-5 text-primary" />
+                        <span className="font-semibold text-card-foreground">
+                          Kinza Tech Solutions
+                        </span>
+                        <ExternalLink className="h-3 w-3 text-muted-foreground ml-auto" />
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Digital Creative Services - Web Design, Social Media
+                        Marketing & Graphic Design
+                      </p>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      Digital Creative Services - Web Design, Social Media
-                      Marketing & Graphic Design
-                    </p>
-                  </div>
+                  </Link>
 
                   <h3 className="text-xl font-semibold mt-8 mb-4 text-foreground">
                     Connect With Me
                   </h3>
                   <div className="flex gap-3">
                     <Link
-                      href="https://linkedin.com/in/abu-zar786"
+                      href="https://www.linkedin.com/in/abu-zar786"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -567,7 +668,7 @@ export default function Home() {
                   </h3>
                   <div className="space-y-2">
                     <Link
-                      href="https://wisdomwave045.blogspot.com"
+                      href="https://wisdomwave045.blogspot.com/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary hover:underline flex items-center gap-2"
@@ -606,15 +707,24 @@ export default function Home() {
             <div className="text-center md:text-left">
               <h2 className="text-2xl font-bold mb-1 text-white">Abu Zar</h2>
               <p className="text-slate-400">
-                MERN Stack Developer | Social Media Marketer
+                IT Professional | Web Developer | Digital Marketer
               </p>
               <p className="text-slate-500 text-sm mt-1">
-                Founder - Kinza Tech Solutions | Digital Creative Services
+                Founder -{" "}
+                <Link
+                  href="https://v0-kinza-tech-portfolio.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  Kinza Tech Solutions
+                </Link>{" "}
+                | Digital Creative Services
               </p>
             </div>
             <div className="flex gap-3">
               <Link
-                href="https://linkedin.com/in/abu-zar786"
+                href="https://www.linkedin.com/in/abu-zar786"
                 target="_blank"
                 rel="noopener noreferrer"
               >

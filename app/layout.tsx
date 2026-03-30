@@ -55,7 +55,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className} suppressHydrationWarning>
-        <ThemeProvider defaultTheme="light">
+        <ThemeProvider defaultTheme="dark">
           {children}
         </ThemeProvider>
       </body>

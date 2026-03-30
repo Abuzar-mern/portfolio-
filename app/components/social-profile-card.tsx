@@ -1,13 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import { Github, Linkedin, ExternalLink } from "lucide-react"
+import { Github, Linkedin, Youtube, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { AnimateInView } from "./animate-in-view"
 
 interface SocialProfileCardProps {
-  platform: "github" | "linkedin"
+  platform: "github" | "linkedin" | "youtube"
   username: string
   title: string
   description: string
@@ -26,10 +26,19 @@ export function SocialProfileCard({
   delay = 0,
 }: SocialProfileCardProps) {
   const isGitHub = platform === "github"
-  const bgGradient = isGitHub
-    ? "from-slate-800 to-slate-900"
-    : "from-blue-600 to-blue-700"
-  const icon = isGitHub ? Github : Linkedin
+  const isLinkedIn = platform === "linkedin"
+  const isYouTube = platform === "youtube"
+  
+  let bgGradient = "from-slate-800 to-slate-900"
+  let icon = Github
+  
+  if (isLinkedIn) {
+    bgGradient = "from-blue-600 to-blue-700"
+    icon = Linkedin
+  } else if (isYouTube) {
+    bgGradient = "from-red-600 to-red-700"
+    icon = Youtube
+  }
 
   return (
     <AnimateInView delay={delay}>
@@ -40,11 +49,9 @@ export function SocialProfileCard({
               <p className="text-sm opacity-90 mb-1">{title}</p>
               <h3 className="text-2xl md:text-3xl font-bold">{username}</h3>
             </div>
-            {icon === Github ? (
-              <Github className="h-8 w-8 opacity-80" />
-            ) : (
-              <Linkedin className="h-8 w-8 opacity-80" />
-            )}
+            {icon === Github && <Github className="h-8 w-8 opacity-80" />}
+            {icon === Linkedin && <Linkedin className="h-8 w-8 opacity-80" />}
+            {icon === Youtube && <Youtube className="h-8 w-8 opacity-80" />}
           </div>
           <p className="text-sm md:text-base opacity-90 mb-6 leading-relaxed">
             {description}
@@ -55,6 +62,8 @@ export function SocialProfileCard({
               className={`w-full transition-all duration-300 ${
                 isGitHub
                   ? "bg-white text-slate-900 hover:bg-slate-100"
+                  : isYouTube
+                  ? "bg-white text-red-700 hover:bg-red-50"
                   : "bg-white text-blue-700 hover:bg-blue-50"
               }`}
             >

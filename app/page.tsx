@@ -22,22 +22,28 @@ import { AnimateInView } from "./components/animate-in-view"
 import { SectionHeading } from "./components/section-heading"
 import { AnimatedSkillCard } from "./components/animated-skill-card"
 import { SkillIconCard } from "./components/skill-icon-card"
+import { SkillsGridSection } from "./components/skills-grid-section"
+import { StatsSection } from "./components/stats-section"
+import { ProjectsFilterSection } from "./components/projects-filter-section"
 import { AnimatedProjectCard } from "./components/animated-project-card"
 import { AnimatedExperienceItem } from "./components/animated-experience-item"
 import { AnimatedContactForm } from "./components/animated-contact-form"
 import { ScrollToTop } from "./components/scroll-to-top"
 import { FloatingSocialSidebar } from "./components/floating-social-sidebar"
 import { SocialProfileCard } from "./components/social-profile-card"
+import { TypewriterEffect } from "./components/typewriter-effect"
+import { GradientText } from "./components/gradient-text"
 import { BrandIcons } from "./lib/skill-icons"
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col relative">
       <FloatingSocialSidebar />
-      {/* Header/Navbar */}
-      <header className="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      {/* Header/Navbar - Glassmorphism */}
+      <header className="fixed top-0 z-50 w-full backdrop-blur-xl bg-black/30 border-b border-white/10 supports-[backdrop-filter]:bg-black/30">
         <div className="container flex h-16 items-center">
-          <Link href="/" className="flex items-center font-bold text-xl text-foreground">
+          <Link href="/" className="flex items-center font-bold text-xl text-foreground hover:text-primary transition-colors">
+            <span className="bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full px-3 py-1 text-white text-sm font-bold mr-2">AZ</span>
             Abu Zar
           </Link>
           <nav className="ml-auto hidden md:flex gap-6">
@@ -89,11 +95,30 @@ export default function Home() {
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
               <AnimateInView direction="left">
                 <div className="space-y-5">
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-balance text-white">
-                    {"Hi, I'm Abu Zar"}
+                  {/* Available Badge */}
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/20 border border-green-500/30">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium text-green-300">Available for Freelance</span>
+                  </div>
+                  
+                  {/* Main Heading with Gradient */}
+                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-balance">
+                    <GradientText>{"Hi, I'm Abu Zar"}</GradientText>
                   </h1>
+                  
+                  {/* Typewriter Effect */}
                   <p className="text-xl md:text-2xl text-slate-300">
-                    IT Professional | Web Developer | Digital Marketer
+                    <TypewriterEffect
+                      texts={[
+                        "IT Professional",
+                        "MERN Stack Developer",
+                        "Digital Marketer",
+                        "Graphic Designer",
+                      ]}
+                      speed={50}
+                      delay={2000}
+                      className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
+                    />
                   </p>
                   <p className="text-slate-400 max-w-[600px] leading-relaxed">
                     Detail-oriented IT professional and Computer Science graduate
@@ -159,6 +184,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Stats Section */}
+        <StatsSection />
 
         {/* About Section */}
         <section id="about" className="py-16 md:py-24 bg-background">
@@ -282,77 +310,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Skills Section */}
-        <section id="skills" className="py-16 md:py-24 bg-background">
-          <div className="container px-4 md:px-6">
-            <SectionHeading
-              title="My Skills"
-              subtitle="Technologies and tools I work with"
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              <SkillIconCard
-                title="Graphic Design"
-                skills={[
-                  { name: "CorelDRAW", icon: BrandIcons.CorelDRAW, color: "#009A44" },
-                  { name: "Photoshop", icon: BrandIcons.AdobePhotoshop, color: "#31A8FF" },
-                  { name: "Illustrator", icon: BrandIcons.AdobeIllustrator, color: "#FF9A00" },
-                  { name: "InPage", icon: BrandIcons.InPage, color: "#003D7A" },
-                ]}
-                delay={100}
-              />
-              <SkillIconCard
-                title="Web Technologies"
-                skills={[
-                  { name: "HTML5", icon: BrandIcons.HTML5, color: "#E34F26" },
-                  { name: "CSS3", icon: BrandIcons.CSS3, color: "#1572B6" },
-                  { name: "JavaScript", icon: BrandIcons.JavaScript, color: "#F7DF1E" },
-                  { name: "WordPress", icon: BrandIcons.WordPress, color: "#21759B" },
-                ]}
-                delay={200}
-              />
-              <SkillIconCard
-                title="MERN Stack (Learning)"
-                skills={[
-                  { name: "React.js", icon: BrandIcons.React, color: "#61DAFB" },
-                  { name: "Node.js", icon: BrandIcons.NodeJS, color: "#339933" },
-                  { name: "Express.js", icon: BrandIcons.Express, color: "#000000" },
-                  { name: "MongoDB", icon: BrandIcons.MongoDB, color: "#47A248" },
-                ]}
-                delay={300}
-              />
-              <SkillIconCard
-                title="Office Tools"
-                skills={[
-                  { name: "MS Word", icon: BrandIcons.MSWord, color: "#2B579A" },
-                  { name: "MS Excel", icon: BrandIcons.MSExcel, color: "#217346" },
-                  { name: "MS PowerPoint", icon: BrandIcons.MSPowerPoint, color: "#D24726" },
-                  { name: "QuickBooks", icon: BrandIcons.QuickBooks, color: "#2CA01C" },
-                ]}
-                delay={400}
-              />
-              <SkillIconCard
-                title="Digital Marketing"
-                skills={[
-                  { name: "Social Media", icon: BrandIcons.SocialMedia, color: "#E946EF" },
-                  { name: "Content Creation", icon: BrandIcons.ContentCreation, color: "#0891B2" },
-                  { name: "SEO Basics", icon: BrandIcons.SEO, color: "#EA7317" },
-                  { name: "Analytics", icon: BrandIcons.Analytics, color: "#E37400" },
-                ]}
-                delay={500}
-              />
-              <SkillIconCard
-                title="Soft Skills"
-                skills={[
-                  { name: "Communication", icon: BrandIcons.Communication, color: "#8B5CF6" },
-                  { name: "Teamwork", icon: BrandIcons.Teamwork, color: "#10B981" },
-                  { name: "Time Mgmt", icon: BrandIcons.TimeManagement, color: "#F59E0B" },
-                  { name: "Problem Solving", icon: BrandIcons.ProblemSolving, color: "#06B6D4" },
-                ]}
-                delay={600}
-              />
-            </div>
-          </div>
-        </section>
+        {/* Skills Section with Grid Icons and Category Tabs */}
+        <SkillsGridSection />
 
         {/* Experience Section */}
         <section id="experience" className="py-16 md:py-24 bg-muted">
@@ -414,59 +373,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Projects Section */}
-        <section id="projects" className="py-16 md:py-24 bg-background">
-          <div className="container px-4 md:px-6">
-            <SectionHeading
-              title="My Projects"
-              subtitle="Work from my professional experience"
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <AnimatedProjectCard
-                title="Kinza Tech Solutions"
-                description="Founded a digital creative services company offering web design, social media marketing, and graphic design solutions."
-                image="/images/project-kinza-tech.jpg"
-                tags={["Web Design", "Marketing", "Branding"]}
-                delay={100}
-              />
-              <AnimatedProjectCard
-                title="Hunani Builders Website"
-                description="Designed and developed a responsive website for Hunani Builders and Developers with property listings."
-                image="/images/project-hunani-builders.jpg"
-                tags={["WordPress", "Web Design"]}
-                delay={200}
-              />
-              <AnimatedProjectCard
-                title="Social Media Campaigns"
-                description="Created and managed social media marketing campaigns for multiple clients at Comrex Pakistan."
-                image="/images/project-social-dashboard.jpg"
-                tags={["Marketing", "Analytics"]}
-                delay={300}
-              />
-              <AnimatedProjectCard
-                title="Print Design Portfolio"
-                description="Collection of print designs including posters, banners, visiting cards, and promotional materials using CorelDRAW, Photoshop and Illustrator."
-                image="/images/project-print-design.jpg"
-                tags={["CorelDRAW", "Photoshop"]}
-                delay={400}
-              />
-              <AnimatedProjectCard
-                title="Personal Blog"
-                description="Created and maintain WisdomWave blog covering tech, web development, and digital marketing topics."
-                image="/images/project-blog.jpg"
-                tags={["Blogger", "Content Writing"]}
-                delay={500}
-              />
-              <AnimatedProjectCard
-                title="Educational Resources"
-                description="Developed educational web content and resources for students at Government Technical College."
-                image="/images/project-education.jpg"
-                tags={["Education", "Web Dev"]}
-                delay={600}
-              />
-            </div>
-          </div>
-        </section>
+        {/* Projects Section with Filter */}
+        <ProjectsFilterSection />
 
         {/* Social Profile Cards Section */}
         <section className="py-16 md:py-24 bg-background">
@@ -493,6 +401,15 @@ export default function Home() {
                 profileUrl="https://www.linkedin.com/in/abuzarabbasi1/"
                 buttonText="Connect on LinkedIn"
                 delay={200}
+              />
+              <SocialProfileCard
+                platform="youtube"
+                username="Abu Zar Channel"
+                title="YouTube Channel"
+                description="Subscribe to my YouTube channel for web development, digital marketing, and tech tutorials and insights."
+                profileUrl="https://www.youtube.com/channel/UCEN08HLCgJBIw7maCTD"
+                buttonText="Subscribe"
+                delay={300}
               />
             </div>
           </div>

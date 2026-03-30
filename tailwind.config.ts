@@ -92,6 +92,27 @@ const config = {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.05)" },
         },
+        countUp: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        glowIndigo: {
+          "0%, 100%": { boxShadow: "0 0 10px rgba(99, 102, 241, 0.5)" },
+          "50%": { boxShadow: "0 0 20px rgba(99, 102, 241, 0.8)" },
+        },
+        gradientMesh: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+        typewriter: {
+          "0%": { width: "0" },
+          "100%": { width: "100%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -102,6 +123,11 @@ const config = {
         slideLeft: "slideLeft 0.5s ease-in-out",
         slideRight: "slideRight 0.5s ease-in-out",
         pulse: "pulse 2s infinite",
+        countUp: "countUp 0.6s ease-out",
+        float: "float 3s ease-in-out infinite",
+        glowIndigo: "glowIndigo 2s ease-in-out infinite",
+        gradientMesh: "gradientMesh 8s ease infinite",
+        typewriter: "typewriter 4s steps(40, end) infinite",
       },
     },
   },

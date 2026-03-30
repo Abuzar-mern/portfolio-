@@ -17,16 +17,21 @@ export function AnimatedExperienceItem({
 }: AnimatedExperienceItemProps) {
   return (
     <AnimateInView delay={delay} direction="left">
-      <div className="relative pl-8 pb-8 border-l-2 border-slate-200 dark:border-slate-700 last:border-0 last:pb-0">
-        <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125 hover:bg-blue-400"></div>
-        <div>
-          <h3 className="text-xl font-semibold">{title}</h3>
-          <div className="flex flex-col sm:flex-row sm:items-center text-muted-foreground mb-2">
-            <span className="font-medium">{company}</span>
+      <div className="relative pl-8 pb-8 border-l-2 border-slate-300 dark:border-slate-600 last:border-0 last:pb-0 group">
+        {/* Timeline dot with hover effect */}
+        <div className="absolute left-[-8px] top-1 w-5 h-5 bg-primary rounded-full transition-all duration-300 group-hover:scale-125 group-hover:bg-blue-400 shadow-md"></div>
+        
+        {/* Card background */}
+        <div className="ml-2 p-4 rounded-lg bg-muted/50 group-hover:bg-muted transition-all duration-300 border border-border/50 group-hover:border-primary/30">
+          <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+            {title}
+          </h3>
+          <div className="flex flex-col sm:flex-row sm:items-center text-muted-foreground mb-3 text-sm">
+            <span className="font-medium text-foreground">{company}</span>
             <span className="hidden sm:block sm:mx-2">•</span>
-            <span>{period}</span>
+            <span className="text-xs">{period}</span>
           </div>
-          <p className="text-muted-foreground">{description}</p>
+          <p className="text-muted-foreground leading-relaxed">{description}</p>
         </div>
       </div>
     </AnimateInView>

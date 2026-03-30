@@ -21,14 +21,19 @@ import { MobileNav } from "./components/mobile-nav"
 import { AnimateInView } from "./components/animate-in-view"
 import { SectionHeading } from "./components/section-heading"
 import { AnimatedSkillCard } from "./components/animated-skill-card"
+import { SkillIconCard } from "./components/skill-icon-card"
 import { AnimatedProjectCard } from "./components/animated-project-card"
 import { AnimatedExperienceItem } from "./components/animated-experience-item"
 import { AnimatedContactForm } from "./components/animated-contact-form"
 import { ScrollToTop } from "./components/scroll-to-top"
+import { FloatingSocialSidebar } from "./components/floating-social-sidebar"
+import { SocialProfileCard } from "./components/social-profile-card"
+import { BrandIcons } from "./lib/skill-icons"
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col relative">
+      <FloatingSocialSidebar />
       {/* Header/Navbar */}
       <header className="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center">
@@ -56,7 +61,13 @@ export default function Home() {
               </Link>
             ))}
           </nav>
-          <div className="flex items-center ml-auto md:ml-4 gap-1">
+          <div className="flex items-center ml-auto md:ml-4 gap-2">
+            <Link href="https://github.com/abuzarabbassi68-create1" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-muted rounded-md transition-colors">
+              <Github className="h-5 w-5 text-foreground" />
+            </Link>
+            <Link href="https://www.linkedin.com/in/abuzarabbasi1/" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-muted rounded-md transition-colors">
+              <Linkedin className="h-5 w-5 text-foreground" />
+            </Link>
             <ThemeToggle />
             <MobileNav />
           </div>
@@ -67,9 +78,14 @@ export default function Home() {
         {/* Hero Section */}
         <section
           id="home"
-          className="min-h-[calc(100vh-4rem)] flex items-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white"
+          className="min-h-[calc(100vh-4rem)] flex items-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden"
         >
-          <div className="container px-4 md:px-6 py-16 md:py-24">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-10 w-72 h-72 bg-violet-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+          </div>
+          <div className="container px-4 md:px-6 py-16 md:py-24 relative z-10">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
               <AnimateInView direction="left">
                 <div className="space-y-5">
@@ -104,14 +120,24 @@ export default function Home() {
                         Contact Me
                       </Button>
                     </Link>
-                    <Link href="#video-cv">
+                    <Link href="https://github.com/abuzarabbassi68-create1" target="_blank" rel="noopener noreferrer">
                       <Button
                         size="lg"
                         variant="outline"
                         className="border-slate-500 text-slate-200 hover:bg-slate-700 hover:text-white transition-transform duration-300 hover:scale-105 w-full sm:w-auto"
                       >
-                        <Play className="mr-2 h-4 w-4" />
-                        Watch Video CV
+                        <Github className="mr-2 h-4 w-4" />
+                        GitHub
+                      </Button>
+                    </Link>
+                    <Link href="https://www.linkedin.com/in/abuzarabbasi1/" target="_blank" rel="noopener noreferrer">
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="border-slate-500 text-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-transform duration-300 hover:scale-105 w-full sm:w-auto"
+                      >
+                        <Linkedin className="mr-2 h-4 w-4" />
+                        LinkedIn
                       </Button>
                     </Link>
                   </div>
@@ -263,35 +289,65 @@ export default function Home() {
               title="My Skills"
               subtitle="Technologies and tools I work with"
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <AnimatedSkillCard
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              <SkillIconCard
                 title="Graphic Design"
-                skills={["CorelDRAW", "Adobe Photoshop", "Adobe Illustrator", "InPage"]}
+                skills={[
+                  { name: "CorelDRAW", icon: BrandIcons.CorelDRAW, color: "#009A44" },
+                  { name: "Photoshop", icon: BrandIcons.AdobePhotoshop, color: "#31A8FF" },
+                  { name: "Illustrator", icon: BrandIcons.AdobeIllustrator, color: "#FF9A00" },
+                  { name: "InPage", icon: BrandIcons.InPage, color: "#003D7A" },
+                ]}
                 delay={100}
               />
-              <AnimatedSkillCard
+              <SkillIconCard
                 title="Web Technologies"
-                skills={["HTML", "CSS", "JavaScript", "WordPress"]}
+                skills={[
+                  { name: "HTML5", icon: BrandIcons.HTML5, color: "#E34F26" },
+                  { name: "CSS3", icon: BrandIcons.CSS3, color: "#1572B6" },
+                  { name: "JavaScript", icon: BrandIcons.JavaScript, color: "#F7DF1E" },
+                  { name: "WordPress", icon: BrandIcons.WordPress, color: "#21759B" },
+                ]}
                 delay={200}
               />
-              <AnimatedSkillCard
+              <SkillIconCard
                 title="MERN Stack (Learning)"
-                skills={["React.js", "Node.js", "Express.js", "MongoDB"]}
+                skills={[
+                  { name: "React.js", icon: BrandIcons.React, color: "#61DAFB" },
+                  { name: "Node.js", icon: BrandIcons.NodeJS, color: "#339933" },
+                  { name: "Express.js", icon: BrandIcons.Express, color: "#000000" },
+                  { name: "MongoDB", icon: BrandIcons.MongoDB, color: "#47A248" },
+                ]}
                 delay={300}
               />
-              <AnimatedSkillCard
+              <SkillIconCard
                 title="Office Tools"
-                skills={["MS Word", "MS Excel", "MS PowerPoint", "QuickBooks"]}
+                skills={[
+                  { name: "MS Word", icon: BrandIcons.MSWord, color: "#2B579A" },
+                  { name: "MS Excel", icon: BrandIcons.MSExcel, color: "#217346" },
+                  { name: "MS PowerPoint", icon: BrandIcons.MSPowerPoint, color: "#D24726" },
+                  { name: "QuickBooks", icon: BrandIcons.QuickBooks, color: "#2CA01C" },
+                ]}
                 delay={400}
               />
-              <AnimatedSkillCard
+              <SkillIconCard
                 title="Digital Marketing"
-                skills={["Social Media Marketing", "Content Creation", "SEO Basics", "Analytics"]}
+                skills={[
+                  { name: "Social Media", icon: BrandIcons.SocialMedia, color: "#E946EF" },
+                  { name: "Content Creation", icon: BrandIcons.ContentCreation, color: "#0891B2" },
+                  { name: "SEO Basics", icon: BrandIcons.SEO, color: "#EA7317" },
+                  { name: "Analytics", icon: BrandIcons.Analytics, color: "#E37400" },
+                ]}
                 delay={500}
               />
-              <AnimatedSkillCard
+              <SkillIconCard
                 title="Soft Skills"
-                skills={["Communication", "Teamwork", "Time Management", "Problem Solving"]}
+                skills={[
+                  { name: "Communication", icon: BrandIcons.Communication, color: "#8B5CF6" },
+                  { name: "Teamwork", icon: BrandIcons.Teamwork, color: "#10B981" },
+                  { name: "Time Mgmt", icon: BrandIcons.TimeManagement, color: "#F59E0B" },
+                  { name: "Problem Solving", icon: BrandIcons.ProblemSolving, color: "#06B6D4" },
+                ]}
                 delay={600}
               />
             </div>
@@ -407,6 +463,36 @@ export default function Home() {
                 image="/images/project-education.jpg"
                 tags={["Education", "Web Dev"]}
                 delay={600}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Social Profile Cards Section */}
+        <section className="py-16 md:py-24 bg-background">
+          <div className="container px-4 md:px-6">
+            <SectionHeading
+              title="Connect With Me"
+              subtitle="Find me on GitHub and LinkedIn"
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+              <SocialProfileCard
+                platform="github"
+                username="@abuzarabbassi68-create1"
+                title="GitHub Profile"
+                description="Explore my repositories, contributions, and open-source projects. See my code and development work in action."
+                profileUrl="https://github.com/abuzarabbassi68-create1"
+                buttonText="View My Repositories"
+                delay={100}
+              />
+              <SocialProfileCard
+                platform="linkedin"
+                username="Abu Zar Abbasi"
+                title="LinkedIn Profile"
+                description="IT Professional | MERN Stack Developer | Digital Marketer. Connect with me to discuss opportunities and collaborations."
+                profileUrl="https://www.linkedin.com/in/abuzarabbasi1/"
+                buttonText="Connect on LinkedIn"
+                delay={200}
               />
             </div>
           </div>
@@ -620,7 +706,7 @@ export default function Home() {
                   </h3>
                   <div className="flex gap-3">
                     <Link
-                      href="https://www.linkedin.com/in/abu-zar786"
+                      href="https://www.linkedin.com/in/abuzarabbasi1/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -634,7 +720,7 @@ export default function Home() {
                       </Button>
                     </Link>
                     <Link
-                      href="https://github.com"
+                      href="https://github.com/abuzarabbassi68-create1"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -724,7 +810,7 @@ export default function Home() {
             </div>
             <div className="flex gap-3">
               <Link
-                href="https://www.linkedin.com/in/abu-zar786"
+                href="https://www.linkedin.com/in/abuzarabbasi1/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -738,7 +824,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link
-                href="https://github.com"
+                href="https://github.com/abuzarabbassi68-create1"
                 target="_blank"
                 rel="noopener noreferrer"
               >

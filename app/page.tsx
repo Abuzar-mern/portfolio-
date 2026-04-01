@@ -22,7 +22,7 @@ import { AnimateInView } from "./components/animate-in-view"
 import { SectionHeading } from "./components/section-heading"
 import { AnimatedSkillCard } from "./components/animated-skill-card"
 import { SkillIconCard } from "./components/skill-icon-card"
-import { SkillsGridSection } from "./components/skills-grid-section"
+import { SkillsShowcase } from "./components/skills-showcase"
 import { StatsSection } from "./components/stats-section"
 import { ProjectsFilterSection } from "./components/projects-filter-section"
 import { AnimatedProjectCard } from "./components/animated-project-card"
@@ -33,11 +33,15 @@ import { FloatingSocialSidebar } from "./components/floating-social-sidebar"
 import { SocialProfileCard } from "./components/social-profile-card"
 import { TypewriterEffect } from "./components/typewriter-effect"
 import { GradientText } from "./components/gradient-text"
+import { FloatingSkillBadges } from "./components/floating-skill-badges"
+import { ScrollIndicator } from "./components/scroll-indicator"
+import { PagePreloader } from "./components/page-preloader"
 import { BrandIcons } from "./lib/skill-icons"
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col relative">
+      <PagePreloader />
       <FloatingSocialSidebar />
       {/* Header/Navbar - Glassmorphism */}
       <header className="fixed top-0 z-50 w-full backdrop-blur-xl bg-black/30 border-b border-white/10 supports-[backdrop-filter]:bg-black/30">
@@ -169,8 +173,12 @@ export default function Home() {
                 </div>
               </AnimateInView>
               <AnimateInView direction="right" delay={300}>
-                <div className="flex justify-center">
-                  <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden border-4 border-slate-700 transition-all duration-500 hover:border-blue-500">
+                <div className="flex justify-center relative">
+                  {/* Glowing ring background */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-75 blur-2xl animate-pulse"></div>
+                  
+                  {/* Profile image with glow */}
+                  <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden border-4 border-indigo-500/50 transition-all duration-500 hover:border-indigo-400 shadow-2xl shadow-indigo-500/50 hover:shadow-indigo-500/80">
                     <Image
                       src="/images/abu-zar-profile-new.png"
                       alt="Abu Zar - IT Professional and Web Developer"
@@ -179,9 +187,18 @@ export default function Home() {
                       priority
                     />
                   </div>
+                  
+                  {/* Floating skill badges */}
+                  <div className="absolute inset-0 w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[400px] lg:h-[400px]">
+                    <FloatingSkillBadges 
+                      skills={["React", "Photoshop", "WordPress", "Node.js"]}
+                    />
+                  </div>
                 </div>
               </AnimateInView>
             </div>
+            {/* Scroll Indicator */}
+            <ScrollIndicator />
           </div>
         </section>
 
@@ -310,8 +327,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Skills Section with Grid Icons and Category Tabs */}
-        <SkillsGridSection />
+        {/* Skills Section with Brand Icons and Category Filter */}
+        <SkillsShowcase />
 
         {/* Experience Section */}
         <section id="experience" className="py-16 md:py-24 bg-muted">

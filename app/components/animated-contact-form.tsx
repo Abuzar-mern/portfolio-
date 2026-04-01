@@ -10,29 +10,68 @@ export function AnimatedContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(
     null
   )
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {}
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required"
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters"
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required"
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address"
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required"
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters"
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }))
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!validateForm()) {
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitStatus(null)
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000))
-      setFormData({ name: "", email: "", message: "" })
+      setFormData({ name: "", email: "", subject: "", message: "" })
       setSubmitStatus("success")
+      
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => setSubmitStatus(null), 5000)
     } catch {
       setSubmitStatus("error")
     } finally {
@@ -48,7 +87,7 @@ export function AnimatedContactForm() {
             htmlFor="name"
             className="block text-sm font-medium mb-1 text-foreground"
           >
-            Name
+            Full Name
           </label>
           <input
             id="name"
@@ -56,17 +95,19 @@ export function AnimatedContactForm() {
             type="text"
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
+            className={`w-full px-4 py-2 border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300 ${
+              errors.name ? "border-red-500 focus:ring-red-500" : "border-border"
+            }`}
             placeholder="Your name"
-            required
           />
+          {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
         </div>
         <div>
           <label
             htmlFor="email"
             className="block text-sm font-medium mb-1 text-foreground"
           >
-            Email
+            Email Address
           </label>
           <input
             id="email"
@@ -74,10 +115,34 @@ export function AnimatedContactForm() {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
-            placeholder="Your email"
-            required
+            className={`w-full px-4 py-2 border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300 ${
+              errors.email ? "border-red-500 focus:ring-red-500" : "border-border"
+            }`}
+            placeholder="your.email@example.com"
           />
+          {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+        </div>
+        <div>
+          <label
+            htmlFor="subject"
+            className="block text-sm font-medium mb-1 text-foreground"
+          >
+            Subject
+          </label>
+          <select
+            id="subject"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
+          >
+            <option value="">Select a subject...</option>
+            <option value="project">Project Inquiry</option>
+            <option value="freelance">Freelance Opportunity</option>
+            <option value="collaboration">Collaboration</option>
+            <option value="feedback">Feedback</option>
+            <option value="other">Other</option>
+          </select>
         </div>
         <div>
           <label
@@ -92,10 +157,12 @@ export function AnimatedContactForm() {
             rows={5}
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300 resize-none"
-            placeholder="Your message"
-            required
+            className={`w-full px-4 py-2 border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300 resize-none ${
+              errors.message ? "border-red-500 focus:ring-red-500" : "border-border"
+            }`}
+            placeholder="Your message (minimum 10 characters)"
           />
+          {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
         </div>
         <Button
           type="submit"

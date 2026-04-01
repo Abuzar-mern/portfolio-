@@ -7,28 +7,65 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Abu Zar | MERN Stack Developer & Digital Marketer",
+  title: "Abu Zar | MERN Stack Developer & Digital Marketer | Portfolio",
   description:
-    "Portfolio website of Abu Zar - MERN Stack Developer, Social Media Marketer & Founder of Kinza Tech Solutions. Based in Mansehra, Pakistan.",
+    "Abu Zar - IT Professional, Web Developer, Digital Marketer and Graphic Designer from Pakistan. Founder of Kinza Tech Solutions. Explore my MERN Stack projects, skills, and professional experience.",
   keywords: [
     "Abu Zar",
     "MERN Stack Developer",
+    "React Developer",
+    "Node.js Developer",
+    "Web Developer",
     "Social Media Marketing",
-    "Web Development",
+    "Digital Marketer",
+    "Graphic Designer",
     "Kinza Tech Solutions",
     "Digital Creative Services",
     "WordPress Developer",
+    "Freelancer",
+    "Web Design",
+    "UI/UX",
     "Mansehra",
     "Pakistan",
   ],
-  authors: [{ name: "Abu Zar" }],
+  authors: [{ name: "Abu Zar Abbasi", url: "https://www.linkedin.com/in/abuzarabbasi1/" }],
+  creator: "Abu Zar Abbasi",
+  publisher: "Kinza Tech Solutions",
   openGraph: {
     title: "Abu Zar | MERN Stack Developer & Digital Marketer",
     description:
-      "Portfolio of Abu Zar - MERN Stack Developer, Social Media Marketer & Founder of Kinza Tech Solutions.",
+      "Professional portfolio of Abu Zar - MERN Stack Developer, Digital Marketer & Founder of Kinza Tech Solutions. View my projects, skills, and experience.",
     type: "website",
+    url: "https://v0-abu-zar-portfolio.vercel.app",
+    siteName: "Abu Zar Portfolio",
+    locale: "en_US",
   },
-    generator: 'v0.app'
+  twitter: {
+    card: "summary_large_image",
+    title: "Abu Zar | MERN Stack Developer & Digital Marketer",
+    description:
+      "Professional portfolio of Abu Zar - MERN Stack Developer, Digital Marketer & Founder of Kinza Tech Solutions.",
+    creator: "@abuzar",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://v0-abu-zar-portfolio.vercel.app",
+  },
+  generator: "v0.app"
 }
 
 export const viewport: Viewport = {

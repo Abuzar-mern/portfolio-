@@ -36,6 +36,9 @@ export function AnimatedProjectCard({
             alt={title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
         <div className="p-6">

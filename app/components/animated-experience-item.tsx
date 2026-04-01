@@ -6,6 +6,7 @@ type AnimatedExperienceItemProps = {
   period: string
   description: string
   delay?: number
+  isCurrent?: boolean
 }
 
 export function AnimatedExperienceItem({
@@ -14,12 +15,16 @@ export function AnimatedExperienceItem({
   period,
   description,
   delay = 0,
+  isCurrent = false,
 }: AnimatedExperienceItemProps) {
   return (
     <AnimateInView delay={delay} direction="left">
-      <div className="relative pl-8 pb-8 last:border-0 last:pb-0 group">
+      <div className="relative pb-8 last:border-0 last:pb-0 group">
         {/* Timeline dot */}
-        <div className="absolute left-[-8px] top-2 w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-sm transition-all duration-300 group-hover:scale-125"></div>
+        <div className={`absolute left-[-40px] top-2 w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-sm transition-all duration-300 group-hover:scale-125 ${isCurrent ? 'animate-pulse' : ''}`}></div>
+        {isCurrent && (
+          <div className="absolute left-[-40px] top-2 w-4 h-4 rounded-full animate-ping opacity-75" style={{boxShadow: '0 0 0 2px #3B82F6'}}></div>
+        )}
         
         {/* Card background */}
         <div className="p-5 rounded-xl bg-white border border-gray-200 group-hover:border-blue-500 group-hover:shadow-md transition-all duration-300">

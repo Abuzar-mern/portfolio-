@@ -83,6 +83,17 @@ const projects: Project[] = [
     category: "education",
     delay: 600,
   },
+  {
+    id: "7",
+    title: "Noor Al Manzil Website",
+    description:
+      "Professional WordPress website for Noor Al Manzil featuring responsive design, smooth animations, and professional branding.",
+    image: "/images/project-noor-almanzil.jpg",
+    tags: ["WordPress", "Web Design"],
+    category: "web",
+    delay: 700,
+    projectUrl: "https://nooralmanzil.ae/",
+  },
 ]
 
 const categories: { label: string; value: ProjectCategory }[] = [

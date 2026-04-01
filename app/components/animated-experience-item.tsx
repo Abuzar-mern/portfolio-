@@ -18,26 +18,15 @@ export function AnimatedExperienceItem({
   isCurrent = false,
 }: AnimatedExperienceItemProps) {
   return (
-    <AnimateInView delay={delay} direction="left">
-      <div className="relative pb-8 last:border-0 last:pb-0 group">
-        {/* Timeline dot */}
-        <div className={`absolute left-[-40px] top-2 w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-sm transition-all duration-300 group-hover:scale-125 ${isCurrent ? 'animate-pulse' : ''}`}></div>
-        {isCurrent && (
-          <div className="absolute left-[-40px] top-2 w-4 h-4 rounded-full animate-ping opacity-75" style={{boxShadow: '0 0 0 2px #3B82F6'}}></div>
-        )}
-        
-        {/* Card background */}
-        <div className="p-5 rounded-xl bg-white border border-gray-200 group-hover:border-blue-500 group-hover:shadow-md transition-all duration-300">
-          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
-            <h3 className="text-lg font-bold text-gray-900">
-              {title}
-            </h3>
-            <span className="inline-block px-3 py-1 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-medium rounded-full">{period}</span>
-          </div>
-          <p className="font-medium text-gray-700 mb-1">{company}</p>
-          <p className="text-gray-700 leading-relaxed">{description}</p>
-        </div>
+    <div className="p-4 border-l-4 border-blue-600 bg-white rounded-lg mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+        <h3 className="text-lg font-semibold text-slate-900">
+          {title}
+        </h3>
+        <span className="text-xs text-slate-600">{period}</span>
       </div>
-    </AnimateInView>
+      <p className="font-medium text-slate-700 mb-1">{company}</p>
+      <p className="text-slate-600 leading-relaxed">{description}</p>
+    </div>
   )
 }

@@ -7,11 +7,12 @@ import {
   MapPin,
   Phone,
   Youtube,
-  Play,
   Globe,
   ExternalLink,
   Award,
-  BookOpen,
+  Briefcase,
+  Code,
+  BarChart3,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -20,552 +21,455 @@ import { ThemeToggle } from "./components/theme-toggle"
 import { MobileNav } from "./components/mobile-nav"
 import { AnimateInView } from "./components/animate-in-view"
 import { SectionHeading } from "./components/section-heading"
-import { Navbar } from "./components/navbar"
-import { HeroSection } from "./components/hero-section"
 import { AnimatedSkillCard } from "./components/animated-skill-card"
-import { SkillIconCard } from "./components/skill-icon-card"
-import { SkillsShowcase } from "./components/skills-showcase"
-import { StatsSection } from "./components/stats-section"
-import { VideoCVSection } from "./components/video-cv-section"
-import { ProjectsFilterSection } from "./components/projects-filter-section"
 import { AnimatedProjectCard } from "./components/animated-project-card"
 import { AnimatedExperienceItem } from "./components/animated-experience-item"
 import { AnimatedContactForm } from "./components/animated-contact-form"
 import { ScrollToTop } from "./components/scroll-to-top"
-import { FloatingSocialSidebar } from "./components/floating-social-sidebar"
-import { SocialProfileCard } from "./components/social-profile-card"
-import { PagePreloader } from "./components/page-preloader"
-import { BrandIcons } from "./lib/skill-icons"
+
+// Simple brand icons inline SVGs
+const BrandIcons = {
+  CorelDRAW: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#009A44" />
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">C</text>
+    </svg>
+  ),
+  Photoshop: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#001E36" />
+      <text x="12" y="16" textAnchor="middle" fill="#31A8FF" fontSize="10" fontWeight="bold">Ps</text>
+    </svg>
+  ),
+  Illustrator: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#FF7C00" />
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Ai</text>
+    </svg>
+  ),
+  InPage: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#1a237e" />
+      <text x="12" y="16" textAnchor="middle" fill="#FFD700" fontSize="9" fontWeight="bold">IP</text>
+    </svg>
+  ),
+  HTML5: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#E34F26" />
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">H</text>
+    </svg>
+  ),
+  CSS3: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#1572B6" />
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">C</text>
+    </svg>
+  ),
+  JavaScript: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#F7DF1E" />
+      <text x="12" y="16" textAnchor="middle" fill="black" fontSize="9" fontWeight="bold">JS</text>
+    </svg>
+  ),
+  WordPress: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#21759B" />
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">W</text>
+    </svg>
+  ),
+  React: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#20232A" />
+      <circle cx="12" cy="12" r="3" fill="#61DAFB" />
+    </svg>
+  ),
+  NodeJS: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#339933" />
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">N</text>
+    </svg>
+  ),
+  Express: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#404040" />
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">EX</text>
+    </svg>
+  ),
+  MongoDB: () => (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="4" fill="#001E2B" />
+      <circle cx="12" cy="12" r="3" fill="#13AA52" />
+    </svg>
+  ),
+}
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col relative">
-      <PagePreloader />
-      <FloatingSocialSidebar />
+    <div className="flex min-h-screen flex-col bg-white">
       {/* Navbar */}
-      <Navbar />
+      <header className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
+        <div className="container flex h-16 items-center px-4 md:px-6">
+          <Link href="/" className="flex items-center gap-2 font-bold text-xl text-gray-900">
+            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold">AZ</div>
+            Abu Zar
+          </Link>
+
+          <div className="ml-auto flex items-center gap-3">
+            <nav className="hidden md:flex gap-8">
+              <Link href="#home" className="text-sm text-gray-700 hover:text-blue-500">Home</Link>
+              <Link href="#about" className="text-sm text-gray-700 hover:text-blue-500">About</Link>
+              <Link href="#skills" className="text-sm text-gray-700 hover:text-blue-500">Skills</Link>
+              <Link href="#experience" className="text-sm text-gray-700 hover:text-blue-500">Experience</Link>
+              <Link href="#projects" className="text-sm text-gray-700 hover:text-blue-500">Projects</Link>
+              <Link href="#contact" className="text-sm text-gray-700 hover:text-blue-500">Contact</Link>
+            </nav>
+            
+            <div className="flex items-center gap-2">
+              <a href="https://github.com/abuzarabbassi68-create1" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-700 hover:text-blue-500">
+                <Github size={20} />
+              </a>
+              <a href="https://www.linkedin.com/in/abuzarabbasi1/" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-700 hover:text-blue-500">
+                <Linkedin size={20} />
+              </a>
+              <ThemeToggle />
+              <MobileNav />
+            </div>
+          </div>
+        </div>
+      </header>
 
       <main className="flex-1 pt-16">
         {/* Hero Section */}
-        <section id="home">
-          <HeroSection />
-        </section>
-
-        {/* Stats Section */}
-        <StatsSection />
-
-        {/* Video CV Section */}
-        <VideoCVSection />
-
-        {/* About Section */}
-        <section id="about" className="py-16 md:py-24 bg-background">
+        <section id="home" className="py-20 md:py-32 bg-white">
           <div className="container px-4 md:px-6">
-            <SectionHeading title="About Me" />
-            <div className="max-w-3xl mx-auto">
-              <AnimateInView>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Detail-oriented IT professional and Computer Science graduate
-                  with strong skills in graphic designing, office automation, and
-                  web technologies. Experienced in digital documentation,
-                  reporting, and visual content creation. Hands-on knowledge of
-                  HTML, CSS, and JavaScript, currently learning the MERN stack.
-                </p>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Certified in Information Technology, Graphics and Web Design,
-                  Artificial Intelligence, Cybersecurity, and Android
-                  Development. Currently teaching at Government Technical
-                  College Abbottabad and running{" "}
-                  <Link
-                    href="https://v0-kinza-tech-portfolio.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-primary hover:underline"
-                  >
-                    Kinza Tech Solutions
-                  </Link>
-                  , a digital creative services company.
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                  {[
-                    { value: "5+", label: "Years Experience" },
-                    { value: "6+", label: "Companies" },
-                    { value: "9+", label: "Certifications" },
-                    { value: "10+", label: "Projects" },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="text-center p-4 rounded-lg bg-muted"
-                    >
-                      <p className="text-3xl font-bold text-primary">
-                        {stat.value}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {stat.label}
-                      </p>
-                    </div>
-                  ))}
+            <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-50 border border-green-200 rounded-full text-sm text-green-700">
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                  Available for Freelance
                 </div>
-              </AnimateInView>
-            </div>
-          </div>
-        </section>
-
-        {/* Kinza Tech Solutions Banner */}
-        <section className="py-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-          <div className="container px-4 md:px-6">
-            <AnimateInView>
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="text-center md:text-left">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2 text-white">
-                    Kinza Tech Solutions
-                  </h2>
-                  <p className="text-blue-100 text-lg">
-                    Digital Creative Services - Web Design, Social Media
-                    Marketing & Graphic Design
-                  </p>
+                <h1 className="text-5xl md:text-6xl font-bold text-gray-900">Hi, I'm Abu Zar</h1>
+                <p className="text-xl text-gray-600">IT Professional | MERN Stack Developer | Digital Marketer | Graphic Designer</p>
+                <p className="text-gray-700 leading-relaxed">
+                  Detail-oriented IT professional with 5+ years of experience in graphic design, web development, and digital marketing. Founder of Kinza Tech Solutions.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <ResumeDownload />
+                  <a href="#contact">
+                    <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+                      <Mail size={18} className="mr-2" />
+                      Contact Me
+                    </Button>
+                  </a>
                 </div>
-                <Link
-                  href="https://v0-kinza-tech-portfolio.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    size="lg"
-                    className="bg-white text-blue-700 hover:bg-blue-50 font-semibold transition-transform duration-300 hover:scale-105"
-                  >
-                    <Globe className="mr-2 h-4 w-4" />
-                    Visit Website
-                  </Button>
-                </Link>
+                <div className="flex gap-3">
+                  <a href="https://github.com/abuzarabbassi68-create1" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-100 hover:bg-blue-50 rounded-lg text-gray-700 hover:text-blue-500">
+                    <Github size={24} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/abuzarabbasi1/" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-100 hover:bg-blue-50 rounded-lg text-gray-700 hover:text-blue-500">
+                    <Linkedin size={24} />
+                  </a>
+                </div>
               </div>
-            </AnimateInView>
-          </div>
-        </section>
-
-        {/* Video CV Section */}
-        <section id="video-cv" className="py-16 md:py-24 bg-muted">
-          <div className="container px-4 md:px-6">
-            <SectionHeading title="Watch My Video CV" />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto items-center">
-              <AnimateInView direction="left">
-                <div className="space-y-6">
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    Watch my professional video resume to learn more about my
-                    skills, experience, and career journey. Get a closer look at
-                    who I am and what I bring to the table.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    With over 5 years of experience in IT, graphic design, web
-                    development, and digital marketing, I bring a unique blend of
-                    creativity and technical expertise to every project.
-                  </p>
-                  <div className="pt-2">
-                    <ResumeDownload />
-                  </div>
-                </div>
-              </AnimateInView>
-              <AnimateInView direction="right" delay={200}>
-                <div className="relative rounded-xl overflow-hidden shadow-2xl aspect-video">
-                  <iframe
-                    src="https://drive.google.com/file/d/1lzPEMf7Dnc5EKtSPGAmLD8x-U_S3jFfE/preview"
-                    className="w-full h-full absolute inset-0"
-                    allow="autoplay"
-                    loading="lazy"
-                    title="Abu Zar - Video CV"
+              <div className="flex justify-center">
+                <div className="relative w-80 h-80">
+                  <Image
+                    src="/images/abu-zar-profile-new.png"
+                    alt="Abu Zar"
+                    fill
+                    className="object-cover rounded-2xl border-4 border-blue-500"
                   />
                 </div>
-              </AnimateInView>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Skills Section with Brand Icons and Category Filter */}
-        <SkillsShowcase />
+        {/* About Section */}
+        <section id="about" className="py-20 md:py-32 bg-gray-50">
+          <div className="container px-4 md:px-6">
+            <SectionHeading title="About Me" />
+            <div className="max-w-3xl mx-auto text-center text-gray-700 space-y-4">
+              <p>Detail-oriented IT professional and Computer Science graduate with strong skills in graphic designing, office automation, and web technologies.</p>
+              <p>Currently teaching at Government Technical College Abbottabad and running Kinza Tech Solutions, a digital creative services company specializing in web design, social media marketing, and graphic design.</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-4">
+                {[
+                  { value: "5+", label: "Years Experience" },
+                  { value: "6+", label: "Companies" },
+                  { value: "9+", label: "Certifications" },
+                  { value: "10+", label: "Projects" },
+                ].map((stat) => (
+                  <div key={stat.label} className="p-4 bg-white rounded-xl border border-gray-200">
+                    <p className="text-3xl font-bold text-blue-500">{stat.value}</p>
+                    <p className="text-sm text-gray-600">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Skills Section */}
+        <section id="skills" className="py-20 md:py-32 bg-white">
+          <div className="container px-4 md:px-6">
+            <SectionHeading title="Skills" />
+            <div className="max-w-5xl mx-auto">
+              <div className="space-y-12">
+                {/* Graphic Design */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Graphic Design</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                    {[
+                      { name: "CorelDRAW", icon: BrandIcons.CorelDRAW },
+                      { name: "Photoshop", icon: BrandIcons.Photoshop },
+                      { name: "Illustrator", icon: BrandIcons.Illustrator },
+                      { name: "InPage", icon: BrandIcons.InPage },
+                    ].map((skill) => (
+                      <div key={skill.name} className="flex flex-col items-center gap-2 p-4 bg-white border border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-md transition-all">
+                        <div className="w-12 h-12">{<skill.icon />}</div>
+                        <span className="text-xs text-gray-700 text-center">{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Web Technologies */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Web Technologies</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                    {[
+                      { name: "HTML5", icon: BrandIcons.HTML5 },
+                      { name: "CSS3", icon: BrandIcons.CSS3 },
+                      { name: "JavaScript", icon: BrandIcons.JavaScript },
+                      { name: "WordPress", icon: BrandIcons.WordPress },
+                    ].map((skill) => (
+                      <div key={skill.name} className="flex flex-col items-center gap-2 p-4 bg-white border border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-md transition-all">
+                        <div className="w-12 h-12">{<skill.icon />}</div>
+                        <span className="text-xs text-gray-700 text-center">{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* MERN Stack */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">MERN Stack (Learning)</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                    {[
+                      { name: "React.js", icon: BrandIcons.React },
+                      { name: "Node.js", icon: BrandIcons.NodeJS },
+                      { name: "Express.js", icon: BrandIcons.Express },
+                      { name: "MongoDB", icon: BrandIcons.MongoDB },
+                    ].map((skill) => (
+                      <div key={skill.name} className="flex flex-col items-center gap-2 p-4 bg-white border border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-md transition-all">
+                        <div className="w-12 h-12">{<skill.icon />}</div>
+                        <span className="text-xs text-gray-700 text-center">{skill.name}</span>
+                        <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Learning</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Soft Skills */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Soft Skills</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {["Communication", "Teamwork", "Time Management", "Problem Solving"].map((skill) => (
+                      <span key={skill} className="px-4 py-2 bg-blue-50 border border-blue-200 text-blue-700 rounded-full text-sm font-medium">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-16 md:py-24 bg-muted">
+        <section id="experience" className="py-20 md:py-32 bg-gray-50">
           <div className="container px-4 md:px-6">
-            <SectionHeading title="Professional Experience" />
+            <SectionHeading title="Experience" />
             <div className="max-w-3xl mx-auto">
-              <div className="space-y-8">
+              <div className="relative pl-8 space-y-8">
+                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                
                 <AnimatedExperienceItem
-                  title="Teacher - Web Development & IT"
+                  title="Instructor"
                   company="Government Technical College Abbottabad"
-                  period="May 2025 - Present"
-                  description="Teaching web development and digital marketing skills to technical students at a government institution."
+                  period="Jun 2024 - Present"
+                  description="Teaching IT courses including Office automation, Internet & Networking, and IT fundamentals to students."
+                  delay={0}
+                />
+                <AnimatedExperienceItem
+                  title="Senior Graphic Designer"
+                  company="Comrex Pakistan"
+                  period="Dec 2023 - May 2024"
+                  description="Managed social media accounts, created promotional designs, and coordinated digital marketing campaigns."
                   delay={100}
                 />
                 <AnimatedExperienceItem
-                  title="Social Media Marketer"
-                  company="Software Company (Comrex Pakistan)"
-                  period="August 2024 - April 2025"
-                  description="Managed social media accounts, created marketing campaigns, and increased brand visibility through strategic content."
+                  title="Graphic Designer & Web Developer"
+                  company="Hunani Builders & Developers"
+                  period="Apr 2022 - Nov 2023"
+                  description="Designed website, created marketing materials, and managed digital presence for real estate company."
                   delay={200}
                 />
                 <AnimatedExperienceItem
-                  title="IT & Digital Support / Assistant Manager"
-                  company="Hunani Builders & Developers, Karachi"
-                  period="January 2022 - July 2024"
-                  description="Managed digital records, reports, and documentation using MS Office tools. Supported business operations through graphic design and digital content creation. Maintained structured data, daily reports, and assisted in IT-related tasks."
+                  title="Graphic Design Instructor"
+                  company="Mansehra Institute of Technology"
+                  period="Jun 2022 - Aug 2022"
+                  description="Taught graphic design fundamentals including CorelDRAW, Photoshop, and digital design principles."
                   delay={300}
                 />
                 <AnimatedExperienceItem
-                  title="IT & Office Automation Intern (Paid - 6 Months)"
-                  company="Govt. Technical & Vocational Center, Khaki, Mansehra"
-                  period="May 2020"
-                  description="Received practical training in office automation, graphics, and basic web-related tasks. Assisted in maintaining documentation, records, and workflow processes. Supported instructors and staff in daily IT and administrative activities."
+                  title="Content Creator & Blogger"
+                  company="WisdomWave Blog"
+                  period="2020 - Present"
+                  description="Creating technical content and tutorials on web development, design, and digital marketing."
                   delay={400}
                 />
                 <AnimatedExperienceItem
-                  title="Graphic Designer (Part-Time)"
-                  company="Baber Printing Press, Mansehra"
-                  period="June 2015 - May 2017"
-                  description="Designed posters, banners, visiting cards, and promotional materials. Used CorelDRAW, Adobe Photoshop, Adobe Illustrator, and InPage. Prepared print-ready files and handled client revisions professionally."
+                  title="Freelance Graphic Designer"
+                  company="Self-employed"
+                  period="2018 - Present"
+                  description="Providing graphics design services including logo design, flyers, banners, and digital content."
                   delay={500}
                 />
                 <AnimatedExperienceItem
-                  title="Data Entry Operator"
-                  company="Plus Pharmacy, Abbottabad"
-                  period="5 months"
-                  description="Managed data entry operations and maintained accurate records for pharmacy inventory and sales."
+                  title="Founder & Owner"
+                  company="Kinza Tech Solutions"
+                  period="2021 - Present"
+                  description="Founded digital creative services company offering web design, social media marketing, and graphic design."
                   delay={600}
                 />
-                <AnimatedExperienceItem
-                  title="Relationship Service Officer"
-                  company="Ufone (Mobile Operator)"
-                  period="3 months"
-                  description="Provided customer service and managed client relationships for the telecom company."
-                  delay={700}
-                />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Projects Section with Filter */}
-        <ProjectsFilterSection />
-
-        {/* Social Profile Cards Section */}
-        <section className="py-16 md:py-24 bg-background">
+        {/* Projects Section */}
+        <section id="projects" className="py-20 md:py-32 bg-white">
           <div className="container px-4 md:px-6">
-            <SectionHeading
-              title="Connect With Me"
-              subtitle="Find me on GitHub and LinkedIn"
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-              <SocialProfileCard
-                platform="github"
-                username="@abuzarabbassi68-create1"
-                title="GitHub Profile"
-                description="Explore my repositories, contributions, and open-source projects. See my code and development work in action."
-                profileUrl="https://github.com/abuzarabbassi68-create1"
-                buttonText="View My Repositories"
-                delay={100}
+            <SectionHeading title="Projects" />
+            <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+              <AnimatedProjectCard
+                title="Kinza Tech Solutions"
+                description="Founded a digital creative services company offering web design, social media marketing, and graphic design."
+                image="/images/project-kinza-tech.jpg"
+                tags={["Web Design", "Marketing"]}
+                projectUrl="https://v0-kinza-tech-portfolio.vercel.app/"
               />
-              <SocialProfileCard
-                platform="linkedin"
-                username="Abu Zar Abbasi"
-                title="LinkedIn Profile"
-                description="IT Professional | MERN Stack Developer | Digital Marketer. Connect with me to discuss opportunities and collaborations."
-                profileUrl="https://www.linkedin.com/in/abuzarabbasi1/"
-                buttonText="Connect on LinkedIn"
-                delay={200}
+              <AnimatedProjectCard
+                title="Hunani Builders Website"
+                description="Designed responsive website for real estate company with modern design and property listings."
+                image="/images/project-hunani-builders.jpg"
+                tags={["WordPress", "Design"]}
+                projectUrl="https://github.com/abuzarabbassi68-create1"
               />
-              <SocialProfileCard
-                platform="youtube"
-                username="Abu Zar Channel"
-                title="YouTube Channel"
-                description="Subscribe to my YouTube channel for web development, digital marketing, and tech tutorials and insights."
-                profileUrl="https://www.youtube.com/channel/UCEN08HLCgJBIw7maCTD"
-                buttonText="Subscribe"
-                delay={300}
+              <AnimatedProjectCard
+                title="WisdomWave Blog"
+                description="Created and maintain blog featuring tech tutorials, web development tips, and digital marketing insights."
+                image="/images/project-blog.jpg"
+                tags={["Blogger", "Content"]}
+                projectUrl="https://wisdomwave045.blogspot.com/"
+              />
+              <AnimatedProjectCard
+                title="Print Design Portfolio"
+                description="Collection of professional print designs including logos, posters, banners, and marketing materials."
+                image="/images/project-print-design.jpg"
+                tags={["CorelDRAW", "Design"]}
+                projectUrl="https://github.com/abuzarabbassi68-create1"
+              />
+              <AnimatedProjectCard
+                title="Noor Al Manzil Website"
+                description="Professional WordPress website featuring responsive design and smooth animations."
+                image="/images/project-noor-almanzil.jpg"
+                tags={["WordPress", "Design"]}
+                projectUrl="https://nooralmanzil.ae/"
+              />
+              <AnimatedProjectCard
+                title="Social Media Campaigns"
+                description="Managed multiple social media marketing campaigns with analytics and content strategy."
+                image="/images/project-social-dashboard.jpg"
+                tags={["Marketing", "Analytics"]}
+                projectUrl="https://github.com/abuzarabbassi68-create1"
               />
             </div>
           </div>
         </section>
 
-        {/* Education Section */}
-        <section id="education" className="py-16 md:py-24 bg-muted">
+        {/* Certifications Section */}
+        <section id="certifications" className="py-20 md:py-32 bg-gray-50">
           <div className="container px-4 md:px-6">
-            <SectionHeading title="Education" />
-            <div className="max-w-3xl mx-auto">
-              <div className="space-y-8">
-                <AnimateInView direction="left" delay={100}>
-                  <div className="relative pl-8 pb-8 border-l-2 border-border">
-                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125" />
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <BookOpen className="h-5 w-5 text-primary" />
-                        <h3 className="text-xl font-semibold text-foreground">
-                          Bachelor of Science in Computer Science (BSCS)
-                        </h3>
-                      </div>
-                      <p className="text-muted-foreground">Hazara University, Pakistan</p>
-                    </div>
-                  </div>
-                </AnimateInView>
-                <AnimateInView direction="left" delay={200}>
-                  <div className="relative pl-8 pb-8 border-l-2 border-border">
-                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125" />
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <BookOpen className="h-5 w-5 text-primary" />
-                        <h3 className="text-xl font-semibold text-foreground">
-                          F.Sc (Pre-Engineering)
-                        </h3>
-                      </div>
-                      <p className="text-muted-foreground">
-                        Government Higher Secondary School Bherkund, Mansehra
-                      </p>
-                    </div>
-                  </div>
-                </AnimateInView>
-                <AnimateInView direction="left" delay={300}>
-                  <div className="relative pl-8 border-l-2 border-border">
-                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full transition-all duration-300 hover:scale-125" />
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <BookOpen className="h-5 w-5 text-primary" />
-                        <h3 className="text-xl font-semibold text-foreground">
-                          Matric (Science)
-                        </h3>
-                      </div>
-                      <p className="text-muted-foreground">
-                        Government Higher Secondary School Bherkund, Mansehra
-                      </p>
-                    </div>
-                  </div>
-                </AnimateInView>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Diplomas & Certifications Section */}
-        <section id="certifications" className="py-16 md:py-24 bg-background">
-          <div className="container px-4 md:px-6">
-            <SectionHeading
-              title="Diplomas & Certifications"
-              subtitle="Professional qualifications and achievements"
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <SectionHeading title="Certifications" />
+            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
               {[
-                {
-                  title: "Office Automation Diploma",
-                  year: "2016",
-                  type: "Diploma",
-                },
-                {
-                  title: "Spoken English Diploma",
-                  year: "2017",
-                  type: "Diploma",
-                },
-                {
-                  title: "Achievement Certificate - Stage Secretary",
-                  year: "2019",
-                  type: "Certificate",
-                },
-                {
-                  title: "Diploma in Information Technology (DIT - 1 Year)",
-                  year: "2021",
-                  type: "Diploma",
-                },
-                {
-                  title: "IT Certificate - Graphics, Web & Mobile App Designing",
-                  year: "2021",
-                  type: "Certificate",
-                },
-                {
-                  title: "Foundation of Artificial Intelligence",
-                  year: "2023",
-                  type: "Online - Great Learning",
-                },
-                {
-                  title: "Android Application Development",
-                  year: "2023",
-                  type: "Online - Great Learning",
-                },
-                {
-                  title: "Introduction to Cybersecurity",
-                  year: "2023",
-                  type: "Online - Great Learning",
-                },
-                {
-                  title: "Soft Skills Diploma",
-                  year: "2025",
-                  type: "OEC",
-                },
-              ].map((cert, index) => (
-                <AnimateInView key={cert.title} delay={index * 100}>
-                  <div className="p-5 rounded-lg bg-card border border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                    <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-md bg-primary/10 shrink-0">
-                        <Award className="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-card-foreground leading-snug">
-                          {cert.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {cert.year} - {cert.type}
-                        </p>
-                      </div>
+                { name: "Information Technology", issuer: "NCVET", year: "2021" },
+                { name: "Graphics Design", issuer: "NCVET", year: "2020" },
+                { name: "Web Design", issuer: "NCVET", year: "2020" },
+                { name: "Artificial Intelligence", issuer: "Microsoft", year: "2022" },
+                { name: "Cybersecurity", issuer: "Cisco", year: "2023" },
+                { name: "Android Development", issuer: "Google", year: "2021" },
+                { name: "Digital Marketing", issuer: "Google", year: "2022" },
+                { name: "Social Media Marketing", issuer: "HubSpot", year: "2023" },
+                { name: "Python Programming", issuer: "Coursera", year: "2022" },
+              ].map((cert) => (
+                <div key={cert.name} className="p-6 bg-white border border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-md transition-all">
+                  <div className="flex items-start gap-3">
+                    <Award className="text-blue-500 mt-1" size={24} />
+                    <div className="flex-1">
+                      <h3 className="font-bold text-gray-900">{cert.name}</h3>
+                      <p className="text-sm text-gray-600">{cert.issuer}</p>
+                      <p className="text-xs text-gray-500 mt-1">{cert.year}</p>
                     </div>
                   </div>
-                </AnimateInView>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-24 bg-muted">
+        <section id="contact" className="py-20 md:py-32 bg-white">
           <div className="container px-4 md:px-6">
-            <SectionHeading
-              title="Get In Touch"
-              subtitle="Feel free to contact me for any project or collaboration"
-            />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-              <AnimateInView direction="left">
+            <SectionHeading title="Get In Touch" />
+            <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
+              <div className="md:col-span-2">
+                <AnimatedContactForm />
+              </div>
+              <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold mb-6 text-foreground">
-                    Contact Information
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center group">
-                      <Phone className="h-5 w-5 mr-3 text-primary group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-foreground group-hover:text-primary transition-colors duration-300">
-                        +92 319 9910712
-                      </span>
+                  <h3 className="font-bold text-gray-900 mb-2">Contact Info</h3>
+                  <div className="space-y-3">
+                    <a href="mailto:abuzarabbasi68@gmail.com" className="flex items-center gap-3 text-gray-700 hover:text-blue-500">
+                      <Mail size={20} />
+                      abuzarabbasi68@gmail.com
+                    </a>
+                    <a href="tel:+923199910712" className="flex items-center gap-3 text-gray-700 hover:text-blue-500">
+                      <Phone size={20} />
+                      +92 319 9910712
+                    </a>
+                    <div className="flex items-center gap-3 text-gray-700">
+                      <MapPin size={20} />
+                      Mansehra, Pakistan
                     </div>
-                    <div className="flex items-center group">
-                      <Mail className="h-5 w-5 mr-3 text-primary group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-foreground group-hover:text-primary transition-colors duration-300">
-                        abuzarabbasi68@gmail.com
-                      </span>
-                    </div>
-                    <div className="flex items-start group">
-                      <MapPin className="h-5 w-5 mr-3 mt-1 text-primary group-hover:scale-110 transition-transform duration-300" />
-                      <span className="text-foreground group-hover:text-primary transition-colors duration-300">
-                        Bherkund, Mansehra, Pakistan
-                      </span>
-                    </div>
-                    <div className="flex items-center group">
-                      <Globe className="h-5 w-5 mr-3 text-primary group-hover:scale-110 transition-transform duration-300" />
-                      <Link
-                        href="https://v0-abu-zar-portfolio.vercel.app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-foreground group-hover:text-primary transition-colors duration-300"
-                      >
-                        v0-abu-zar-portfolio.vercel.app
-                      </Link>
-                    </div>
-                  </div>
-
-                  <h3 className="text-xl font-semibold mt-8 mb-4 text-foreground">
-                    My Company
-                  </h3>
-                  <Link
-                    href="https://v0-kinza-tech-portfolio.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <div className="p-4 rounded-lg bg-card border border-border transition-all duration-300 hover:shadow-lg hover:border-primary">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Globe className="h-5 w-5 text-primary" />
-                        <span className="font-semibold text-card-foreground">
-                          Kinza Tech Solutions
-                        </span>
-                        <ExternalLink className="h-3 w-3 text-muted-foreground ml-auto" />
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Digital Creative Services - Web Design, Social Media
-                        Marketing & Graphic Design
-                      </p>
-                    </div>
-                  </Link>
-
-                  <h3 className="text-xl font-semibold mt-8 mb-4 text-foreground">
-                    Connect With Me
-                  </h3>
-                  <div className="flex gap-3">
-                    <Link
-                      href="https://www.linkedin.com/in/abuzarabbasi1/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="transition-all duration-300 hover:bg-blue-600 hover:text-white hover:border-blue-600"
-                      >
-                        <Linkedin className="h-5 w-5" />
-                        <span className="sr-only">LinkedIn</span>
-                      </Button>
-                    </Link>
-                    <Link
-                      href="https://github.com/abuzarabbassi68-create1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="transition-all duration-300 hover:bg-slate-800 hover:text-white hover:border-slate-800"
-                      >
-                        <Github className="h-5 w-5" />
-                        <span className="sr-only">GitHub</span>
-                      </Button>
-                    </Link>
-                    <Link
-                      href="https://www.youtube.com/channel/UCEN08HLCgJBIw7maCTD"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="transition-all duration-300 hover:bg-red-600 hover:text-white hover:border-red-600"
-                      >
-                        <Youtube className="h-5 w-5" />
-                        <span className="sr-only">YouTube</span>
-                      </Button>
-                    </Link>
-                  </div>
-
-                  <h3 className="text-xl font-semibold mt-8 mb-4 text-foreground">
-                    Other Links
-                  </h3>
-                  <div className="space-y-2">
-                    <Link
-                      href="https://wisdomwave045.blogspot.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline flex items-center gap-2"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      wisdomwave045.blogspot.com
-                    </Link>
-                    <Link
-                      href="https://www.youtube.com/channel/UCEN08HLCgJBIw7maCTD"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline flex items-center gap-2"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      YouTube Channel
-                    </Link>
                   </div>
                 </div>
-              </AnimateInView>
 
-              <div>
-                <h3 className="text-xl font-semibold mb-6 text-foreground">
-                  Send Me a Message
-                </h3>
-                <AnimatedContactForm />
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-3">Connect</h3>
+                  <div className="space-y-2">
+                    <a href="https://github.com/abuzarabbassi68-create1" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 bg-gray-900 text-white rounded-lg hover:opacity-90">
+                      <Github size={20} />
+                      @abuzarabbassi68-create1
+                    </a>
+                    <a href="https://www.linkedin.com/in/abuzarabbasi1/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 bg-blue-600 text-white rounded-lg hover:opacity-90">
+                      <Linkedin size={20} />
+                      Abu Zar Abbasi
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -573,74 +477,21 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-12">
+      <footer className="bg-gray-900 text-white py-8">
         <div className="container px-4 md:px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-center md:text-left">
-              <h2 className="text-2xl font-bold mb-1 text-white">Abu Zar</h2>
-              <p className="text-slate-400">
-                IT Professional | Web Developer | Digital Marketer
-              </p>
-              <p className="text-slate-500 text-sm mt-1">
-                Founder -{" "}
-                <Link
-                  href="https://v0-kinza-tech-portfolio.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  Kinza Tech Solutions
-                </Link>{" "}
-                | Digital Creative Services
-              </p>
+          <div className="flex items-center justify-between">
+            <p className="text-gray-400">&copy; 2024 Abu Zar. All rights reserved.</p>
+            <div className="flex gap-4">
+              <a href="https://github.com/abuzarabbassi68-create1" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <Github size={20} />
+              </a>
+              <a href="https://www.linkedin.com/in/abuzarabbasi1/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <Linkedin size={20} />
+              </a>
+              <a href="https://www.youtube.com/channel/UCEN08HLCgJBIw7maCTD" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <Youtube size={20} />
+              </a>
             </div>
-            <div className="flex gap-3">
-              <Link
-                href="https://www.linkedin.com/in/abuzarabbasi1/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-white hover:text-blue-400 hover:bg-slate-800 transition-all duration-300"
-                >
-                  <Linkedin className="h-5 w-5" />
-                  <span className="sr-only">LinkedIn</span>
-                </Button>
-              </Link>
-              <Link
-                href="https://github.com/abuzarabbassi68-create1"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-white hover:text-blue-400 hover:bg-slate-800 transition-all duration-300"
-                >
-                  <Github className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
-                </Button>
-              </Link>
-              <Link
-                href="https://www.youtube.com/channel/UCEN08HLCgJBIw7maCTD"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-white hover:text-red-400 hover:bg-slate-800 transition-all duration-300"
-                >
-                  <Youtube className="h-5 w-5" />
-                  <span className="sr-only">YouTube</span>
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div className="border-t border-slate-800 mt-8 pt-8 text-center">
-            <p className="text-slate-400">{`\u00A9 ${new Date().getFullYear()} Abu Zar. All rights reserved.`}</p>
           </div>
         </div>
       </footer>

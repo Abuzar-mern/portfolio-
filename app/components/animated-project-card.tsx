@@ -29,52 +29,37 @@ export function AnimatedProjectCard({
 }: AnimatedProjectCardProps) {
   return (
     <AnimateInView delay={delay} direction="up">
-      <Card className="overflow-hidden transition-all duration-300 hover:shadow-xl group border-0 bg-card hover:scale-105">
+      <div className="overflow-hidden transition-all duration-300 hover:shadow-lg group bg-white border border-gray-200 hover:border-blue-500 rounded-xl">
         <div className="relative h-48 w-full overflow-hidden">
           <Image
             src={image || "/placeholder.svg"}
             alt={title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
-            {projectUrl && (
-              <Link href={projectUrl} target="_blank" rel="noopener noreferrer">
-                <Button size="sm" variant="ghost" className="text-white hover:text-primary">
-                  <ExternalLink className="h-4 w-4 mr-1" />
-                  View Project
-                </Button>
-              </Link>
-            )}
-            {githubUrl && (
-              <Link href={githubUrl} target="_blank" rel="noopener noreferrer">
-                <Button size="sm" variant="ghost" className="text-white hover:text-primary">
-                  <Github className="h-4 w-4 mr-1" />
-                  GitHub
-                </Button>
-              </Link>
-            )}
-          </div>
         </div>
-        <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-2 text-card-foreground group-hover:text-primary transition-colors">
+        <div className="p-6">
+          <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-blue-500 transition-colors">
             {title}
           </h3>
-          <p className="text-muted-foreground mb-4 text-sm">{description}</p>
-          <div className="flex flex-wrap gap-2">
+          <p className="text-gray-700 mb-4 text-sm">{description}</p>
+          <div className="flex flex-wrap gap-2 mb-4">
             {tags.map((tag, index) => (
-              <Badge
-                key={index}
-                variant="secondary"
-                className="transition-all duration-300 hover:bg-primary hover:text-primary-foreground text-xs"
-              >
+              <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
                 {tag}
-              </Badge>
+              </span>
             ))}
           </div>
-        </CardContent>
-      </Card>
+          {projectUrl && (
+            <Link href={projectUrl} target="_blank" rel="noopener noreferrer">
+              <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                View Project
+              </Button>
+            </Link>
+          )}
+        </div>
+      </div>
     </AnimateInView>
   )
 }

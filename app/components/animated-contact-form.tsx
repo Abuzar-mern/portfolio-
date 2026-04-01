@@ -85,7 +85,7 @@ export function AnimatedContactForm() {
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-medium mb-1 text-foreground"
+            className="block text-sm font-medium mb-1 text-gray-900"
           >
             Full Name
           </label>
@@ -95,8 +95,8 @@ export function AnimatedContactForm() {
             type="text"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-4 py-2 border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300 ${
-              errors.name ? "border-red-500 focus:ring-red-500" : "border-border"
+            className={`w-full px-4 py-2 border rounded-md bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300 ${
+              errors.name ? "border-red-500 focus:ring-red-500" : "border-gray-300"
             }`}
             placeholder="Your name"
           />
@@ -105,7 +105,7 @@ export function AnimatedContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium mb-1 text-foreground"
+            className="block text-sm font-medium mb-1 text-gray-900"
           >
             Email Address
           </label>
@@ -115,8 +115,8 @@ export function AnimatedContactForm() {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-2 border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300 ${
-              errors.email ? "border-red-500 focus:ring-red-500" : "border-border"
+            className={`w-full px-4 py-2 border rounded-md bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300 ${
+              errors.email ? "border-red-500 focus:ring-red-500" : "border-gray-300"
             }`}
             placeholder="your.email@example.com"
           />
@@ -125,7 +125,7 @@ export function AnimatedContactForm() {
         <div>
           <label
             htmlFor="subject"
-            className="block text-sm font-medium mb-1 text-foreground"
+            className="block text-sm font-medium mb-1 text-gray-900"
           >
             Subject
           </label>
@@ -134,7 +134,7 @@ export function AnimatedContactForm() {
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
           >
             <option value="">Select a subject...</option>
             <option value="project">Project Inquiry</option>
@@ -147,7 +147,7 @@ export function AnimatedContactForm() {
         <div>
           <label
             htmlFor="message"
-            className="block text-sm font-medium mb-1 text-foreground"
+            className="block text-sm font-medium mb-1 text-gray-900"
           >
             Message
           </label>
@@ -157,8 +157,8 @@ export function AnimatedContactForm() {
             rows={5}
             value={formData.message}
             onChange={handleChange}
-            className={`w-full px-4 py-2 border rounded-md bg-background text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all duration-300 resize-none ${
-              errors.message ? "border-red-500 focus:ring-red-500" : "border-border"
+            className={`w-full px-4 py-2 border rounded-md bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300 resize-none ${
+              errors.message ? "border-red-500 focus:ring-red-500" : "border-gray-300"
             }`}
             placeholder="Your message (minimum 10 characters)"
           />
@@ -166,7 +166,7 @@ export function AnimatedContactForm() {
         </div>
         <Button
           type="submit"
-          className="w-full transition-all duration-300 hover:scale-[1.02]"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

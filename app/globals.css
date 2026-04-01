@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --font-inter: "Inter";
+    --font-syne: "Syne";
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -27,11 +29,11 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 0 0% 6.27%;
     --foreground: 210 40% 98%;
     --card: 217.2 32.6% 12%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 0 0% 6.27%;
     --popover-foreground: 210 40% 98%;
     --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
@@ -47,6 +49,12 @@
     --input: 217.2 32.6% 22%;
     --ring: 224.3 76.3% 48%;
   }
+}
+
+html.dark {
+  background-color: #0A0A0F;
+  background-image: radial-gradient(circle, #ffffff08 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 @layer base {

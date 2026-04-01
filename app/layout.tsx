@@ -1,10 +1,11 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Syne } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600"] })
+const syne = Syne({ subsets: ["latin"], weight: ["700", "800"] })
 
 export const metadata: Metadata = {
   title: "Abu Zar | MERN Stack Developer & Digital Marketer | Portfolio",

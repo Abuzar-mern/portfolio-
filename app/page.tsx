@@ -20,10 +20,13 @@ import { ThemeToggle } from "./components/theme-toggle"
 import { MobileNav } from "./components/mobile-nav"
 import { AnimateInView } from "./components/animate-in-view"
 import { SectionHeading } from "./components/section-heading"
+import { Navbar } from "./components/navbar"
+import { HeroSection } from "./components/hero-section"
 import { AnimatedSkillCard } from "./components/animated-skill-card"
 import { SkillIconCard } from "./components/skill-icon-card"
 import { SkillsShowcase } from "./components/skills-showcase"
 import { StatsSection } from "./components/stats-section"
+import { VideoCVSection } from "./components/video-cv-section"
 import { ProjectsFilterSection } from "./components/projects-filter-section"
 import { AnimatedProjectCard } from "./components/animated-project-card"
 import { AnimatedExperienceItem } from "./components/animated-experience-item"
@@ -31,10 +34,6 @@ import { AnimatedContactForm } from "./components/animated-contact-form"
 import { ScrollToTop } from "./components/scroll-to-top"
 import { FloatingSocialSidebar } from "./components/floating-social-sidebar"
 import { SocialProfileCard } from "./components/social-profile-card"
-import { TypewriterEffect } from "./components/typewriter-effect"
-import { GradientText } from "./components/gradient-text"
-import { FloatingSkillBadges } from "./components/floating-skill-badges"
-import { ScrollIndicator } from "./components/scroll-indicator"
 import { PagePreloader } from "./components/page-preloader"
 import { BrandIcons } from "./lib/skill-icons"
 
@@ -43,167 +42,20 @@ export default function Home() {
     <div className="flex min-h-screen flex-col relative">
       <PagePreloader />
       <FloatingSocialSidebar />
-      {/* Header/Navbar - Glassmorphism */}
-      <header className="fixed top-0 z-50 w-full backdrop-blur-xl bg-black/30 border-b border-white/10 supports-[backdrop-filter]:bg-black/30">
-        <div className="container flex h-16 items-center">
-          <Link href="/" className="flex items-center font-bold text-xl text-foreground hover:text-primary transition-colors">
-            <span className="bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full px-3 py-1 text-white text-sm font-bold mr-2">AZ</span>
-            Abu Zar
-          </Link>
-          <nav className="ml-auto hidden md:flex gap-6">
-            {[
-              { href: "#home", label: "Home" },
-              { href: "#about", label: "About" },
-              { href: "#video-cv", label: "Video CV" },
-              { href: "#skills", label: "Skills" },
-              { href: "#experience", label: "Experience" },
-              { href: "#projects", label: "Projects" },
-              { href: "#education", label: "Education" },
-              { href: "#certifications", label: "Certifications" },
-              { href: "#contact", label: "Contact" },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="flex items-center ml-auto md:ml-4 gap-2">
-            <Link href="https://github.com/abuzarabbassi68-create1" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-muted rounded-md transition-colors">
-              <Github className="h-5 w-5 text-foreground" />
-            </Link>
-            <Link href="https://www.linkedin.com/in/abuzarabbasi1/" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-muted rounded-md transition-colors">
-              <Linkedin className="h-5 w-5 text-foreground" />
-            </Link>
-            <ThemeToggle />
-            <MobileNav />
-          </div>
-        </div>
-      </header>
+      {/* Navbar */}
+      <Navbar />
 
       <main className="flex-1 pt-16">
         {/* Hero Section */}
-        <section
-          id="home"
-          className="min-h-[calc(100vh-4rem)] flex items-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden"
-        >
-          {/* Animated background elements */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 right-10 w-72 h-72 bg-violet-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
-          </div>
-          <div className="container px-4 md:px-6 py-16 md:py-24 relative z-10">
-            <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
-              <AnimateInView direction="left">
-                <div className="space-y-5">
-                  {/* Available Badge */}
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/20 border border-green-500/30">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-green-300">Available for Freelance</span>
-                  </div>
-                  
-                  {/* Main Heading with Gradient */}
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-balance">
-                    <GradientText>{"Hi, I'm Abu Zar"}</GradientText>
-                  </h1>
-                  
-                  {/* Typewriter Effect */}
-                  <p className="text-xl md:text-2xl text-slate-300">
-                    <TypewriterEffect
-                      texts={[
-                        "IT Professional",
-                        "MERN Stack Developer",
-                        "Digital Marketer",
-                        "Graphic Designer",
-                      ]}
-                      speed={50}
-                      delay={2000}
-                      className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
-                    />
-                  </p>
-                  <p className="text-slate-400 max-w-[600px] leading-relaxed">
-                    Detail-oriented IT professional and Computer Science graduate
-                    with strong skills in graphic designing, office automation,
-                    and web technologies. Founder of{" "}
-                    <Link
-                      href="https://v0-kinza-tech-portfolio.vercel.app/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 font-semibold hover:text-blue-300 underline underline-offset-2 transition-colors"
-                    >
-                      Kinza Tech Solutions
-                    </Link>{" "}
-                    - Digital Creative Services.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                    <ResumeDownload />
-                    <Link href="#contact">
-                      <Button
-                        size="lg"
-                        className="bg-blue-600 hover:bg-blue-700 text-white border-0 transition-transform duration-300 hover:scale-105 w-full sm:w-auto"
-                      >
-                        <Mail className="mr-2 h-4 w-4" />
-                        Contact Me
-                      </Button>
-                    </Link>
-                    <Link href="https://github.com/abuzarabbassi68-create1" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        size="lg"
-                        variant="outline"
-                        className="border-slate-500 text-slate-200 hover:bg-slate-700 hover:text-white transition-transform duration-300 hover:scale-105 w-full sm:w-auto"
-                      >
-                        <Github className="mr-2 h-4 w-4" />
-                        GitHub
-                      </Button>
-                    </Link>
-                    <Link href="https://www.linkedin.com/in/abuzarabbasi1/" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        size="lg"
-                        variant="outline"
-                        className="border-slate-500 text-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-transform duration-300 hover:scale-105 w-full sm:w-auto"
-                      >
-                        <Linkedin className="mr-2 h-4 w-4" />
-                        LinkedIn
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </AnimateInView>
-              <AnimateInView direction="right" delay={300}>
-                <div className="flex justify-center relative">
-                  {/* Glowing ring background */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-75 blur-2xl animate-pulse"></div>
-                  
-                  {/* Profile image with glow */}
-                  <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden border-4 border-indigo-500/50 transition-all duration-500 hover:border-indigo-400 shadow-2xl shadow-indigo-500/50 hover:shadow-indigo-500/80">
-                    <Image
-                      src="/images/abu-zar-profile-new.png"
-                      alt="Abu Zar - IT Professional and Web Developer"
-                      fill
-                      className="object-cover transition-transform duration-700 hover:scale-105"
-                      priority
-                    />
-                  </div>
-                  
-                  {/* Floating skill badges */}
-                  <div className="absolute inset-0 w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[400px] lg:h-[400px]">
-                    <FloatingSkillBadges 
-                      skills={["React", "Photoshop", "WordPress", "Node.js"]}
-                    />
-                  </div>
-                </div>
-              </AnimateInView>
-            </div>
-            {/* Scroll Indicator */}
-            <ScrollIndicator />
-          </div>
+        <section id="home">
+          <HeroSection />
         </section>
 
         {/* Stats Section */}
         <StatsSection />
+
+        {/* Video CV Section */}
+        <VideoCVSection />
 
         {/* About Section */}
         <section id="about" className="py-16 md:py-24 bg-background">
